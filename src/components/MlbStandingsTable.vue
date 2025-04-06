@@ -3,6 +3,8 @@
   import "@/styles/mlbStandingsTable.css";
 
   const { division } = defineProps(['division'])
+
+  console.log(division);
 </script>
 
 <template>
@@ -26,7 +28,7 @@
       </thead>
       <tbody>
         <tr v-for="team in division.standings" :key="team.id">
-          <td>{{team.team.name}}</td>
+          <td><img class="team-logo" :src="team.logo" />{{team.team.name}}</td>
           <td>-</td>
           <td>-</td>
           <td>{{team.wins}}</td>

@@ -13,4 +13,13 @@
 .mlb-standings-table td {
   border: solid 1px black;
   padding: 8px 12px;
+}
+.mlb-standings-table td:nth-of-type(1) {
+  white-space: nowrap;
+}
+.mlb-standings-table td .team-logo {
+  height: 1.2em;
+  width: 1.2em;
+  vertical-align: middle;
+  margin-right: 5px;
 }/*# sourceMappingURL=MlbStandingsTable.css.map */

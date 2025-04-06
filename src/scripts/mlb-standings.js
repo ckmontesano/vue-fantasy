@@ -1,10 +1,11 @@
 import axios from "axios";
+import addAllTeamLogos from "./mlb-team-logos";
 
 const AL_API = "https://statsapi.mlb.com/api/v1/standings?leagueId=103";
 const NL_API = "https://statsapi.mlb.com/api/v1/standings?leagueId=104";
 
 async function getMlbStandings() {
-  const mlbStandings = {
+  var mlbStandings = {
     american: {
       east: { name: "AL East", standings: [] },
       central: { name: "AL Central", standings: [] },
@@ -27,6 +28,8 @@ async function getMlbStandings() {
   mlbStandings.national.east.standings = nlRes.data.records[0].teamRecords;
   mlbStandings.national.central.standings = nlRes.data.records[1].teamRecords;
   mlbStandings.national.west.standings = nlRes.data.records[2].teamRecords;
+
+  mlbStandings = await addAllTeamLogos(mlbStandings);
 
   return mlbStandings;
 }
