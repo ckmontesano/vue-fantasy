@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+.mlb-standings-table {
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+.mlb-standings-table thead tr {
+  background: #bdbdbd;
+  font-weight: 700;
+}
+.mlb-standings-table td {
+  border: solid 1px black;
+  padding: 8px 12px;
+}/*# sourceMappingURL=MlbStandingsTable.css.map */

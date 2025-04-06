@@ -1,0 +1,9 @@
+@import "./global";
+
+.footer {
+  width: 100%;
+  padding: $spacing-32;
+  text-align: center;
+  background: $darkmode-background;
+  color: $darkmode-text-primary;
+}

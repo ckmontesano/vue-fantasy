@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #1c1c1c;
+  color: #f2f2f2;
+  height: 64px;
+}
+.navigation-bar .branding {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: 300;
+  gap: 8px;
+}
+.navigation-bar .branding .logo {
+  height: 36px;
+}
+.navigation-bar .branding .text-container {
+  display: flex;
+  flex-direction: column;
+}
+.navigation-bar .branding .text-container .main {
+  font-size: 1.2em;
+}
+.navigation-bar .branding .text-container .secondary {
+  opacity: 0.6;
+}
+.navigation-bar .options {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.navigation-bar .options .item {
+  font-weight: 600;
+}/*# sourceMappingURL=NavigationBar.css.map */

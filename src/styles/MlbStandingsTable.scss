@@ -1,0 +1,16 @@
+@import "_global.scss";
+
+.mlb-standings-table {
+  border-collapse: collapse;
+  border: solid 1px black;
+
+  thead tr {
+    background: #bdbdbd;
+    font-weight: $font-bold;
+  }
+
+  td {
+    border: solid 1px black;
+    padding: 8px 12px;
+  }
+}

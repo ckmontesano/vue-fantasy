@@ -1,0 +1,46 @@
+@import "./global";
+
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: $darkmode-background;
+  color: $darkmode-text-primary;
+  height: 64px;
+
+  .branding {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: $font-light;
+    gap: $spacing-8;
+
+    .logo {
+      height: 36px;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+
+      .main {
+        font-size: 1.2em;
+      }
+
+      .secondary {
+        opacity: .6;
+      }
+    }
+  }
+
+  .options {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-16;
+
+    .item {
+      font-weight: 600;
+    }
+  }
+}
