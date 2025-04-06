@@ -3,8 +3,6 @@
   import "@/styles/mlbStandingsTable.css";
 
   const { division } = defineProps(['division'])
-
-  console.log(division);
 </script>
 
 <template>
