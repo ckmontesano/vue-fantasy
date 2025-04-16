@@ -5,14 +5,14 @@
   import Footer from "@/components/Footer.vue";
 
   // pages
-  import Home from '@/pages/Home.vue';
+  import HomePage from '@/pages/HomePage.vue';
   import MLBStandings from "@/pages/MLBStandings.vue";
   import NotFound from '@/pages/NotFound.vue';
 
   // routing - https://vuejs.org/guide/scaling-up/routing
   import { ref, computed } from 'vue';
   const routes = {
-    '/': Home,
+    '/': HomePage,
     '/mlb-standings': MLBStandings,
   }
   const currentPath = ref(window.location.hash)
