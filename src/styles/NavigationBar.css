@@ -2,10 +2,15 @@
   box-sizing: border-box;
 }
 
+h1 {
+  margin: 8px 0;
+}
+
 .navigation-bar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0px 64px;
   background: #1c1c1c;
   color: #f2f2f2;
   height: 64px;

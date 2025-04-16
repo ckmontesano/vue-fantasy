@@ -3,7 +3,8 @@
 .navigation-bar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: $spacing-0 $spacing-64;
   background: $darkmode-background;
   color: $darkmode-text-primary;
   height: 64px;
