@@ -40,8 +40,9 @@
     flex-direction: row;
     gap: $spacing-16;
 
-    .item {
-      font-weight: 600;
+    .item a {
+      color: $darkmode-text-primary;
+      font-weight: $font-bold;
     }
   }
 }

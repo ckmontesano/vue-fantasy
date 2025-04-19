@@ -41,6 +41,7 @@ h1 {
   flex-direction: row;
   gap: 16px;
 }
-.navigation-bar .options .item {
-  font-weight: 600;
+.navigation-bar .options .item a {
+  color: #f2f2f2;
+  font-weight: 700;
 }/*# sourceMappingURL=NavigationBar.css.map */
