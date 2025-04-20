@@ -24,12 +24,12 @@ const year = new Date().getFullYear();
       <li class='item'>
         <a href='#/mlb-standings'>MLB Standings</a>
       </li>
-      <li class='item'>
-        <a href='#/trade'>Trade</a>
-      </li>
     </ul>
+    <div class='user-info'>
+      Signed in as <b>Cameron</b>. <a href='#/logout'>Logout</a>
+    </div>
   </div>
-  <div class='status-bar'>
-    Last MLB data update: 6/12/2025 at 8:15pm
+  <div class='status-bar marquee'>
+    <p>Last MLB data update: 6/12/2025 at 8:15pm</p>
   </div>
 </template>
