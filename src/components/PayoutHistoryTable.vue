@@ -1,0 +1,22 @@
+<template>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Team</th>
+        <th>Points</th>
+        <th>Amount</th>
+        <th>Season Winnings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5/01/25</td>
+        <td>Cameron</td>
+        <td>3000</td>
+        <td>$25</td>
+        <td>$125</td>
+      </tr>
+    </tbody>
+  </table>
+</template>

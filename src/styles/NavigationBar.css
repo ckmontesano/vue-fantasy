@@ -6,6 +6,32 @@ h1 {
   margin: 8px 0;
 }
 
+table {
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+table thead tr {
+  background: #bdbdbd;
+  font-weight: 700;
+}
+table th,
+table td {
+  text-align: left;
+  border: solid 1px black;
+  padding: 8px 12px;
+}
+table th .team-logo,
+table td .team-logo {
+  height: 1.2em;
+  width: 1.2em;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+table th.no-wrap,
+table td.no-wrap {
+  white-space: nowrap;
+}
+
 .navigation-bar {
   display: flex;
   align-items: center;
@@ -44,4 +70,10 @@ h1 {
 .navigation-bar .options .item a {
   color: #f2f2f2;
   font-weight: 700;
+}
+
+.status-bar {
+  padding: 8px 64px;
+  background-color: #4f4c4c;
+  text-align: center;
 }/*# sourceMappingURL=NavigationBar.css.map */

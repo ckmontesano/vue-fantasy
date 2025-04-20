@@ -46,3 +46,9 @@
     }
   }
 }
+
+.status-bar {
+  padding: $spacing-8 $spacing-64;
+  background-color: $modal;
+  text-align: center;
+}

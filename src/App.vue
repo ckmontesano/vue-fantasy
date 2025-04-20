@@ -1,12 +1,12 @@
 <script setup>
   // dependencies & components
-  import "@/styles/app.css";
-  import NavigationBar from "@/components/NavigationBar.vue"
-  import Footer from "@/components/Footer.vue";
+  import '@/styles/app.css';
+  import NavigationBar from '@/components/NavigationBar.vue'
+  import Footer from '@/components/Footer.vue';
 
   // pages
   import HomePage from '@/pages/HomePage.vue';
-  import MLBStandings from "@/pages/MLBStandings.vue";
+  import MLBStandings from '@/pages/MLBStandings.vue';
   import NotFound from '@/pages/NotFound.vue';
 
   // routing - https://vuejs.org/guide/scaling-up/routing
@@ -26,8 +26,8 @@
 
 <template>
   <NavigationBar />
-  <div class="page">
-    <component :is="currentView" />
+  <div class='page'>
+    <component :is='currentView' />
   </div>
   <Footer />
 </template>

@@ -1,56 +1,42 @@
-
+<script setup>
+  // components
+  import MlbDivisionLeadersTable from '@/components/MlbDivisionLeadersTable.vue';
+  import FantasyStandingsTable from '@/components/FantasyStandingsTable.vue';
+  import PayoutHistoryTable from '@/components/PayoutHistoryTable.vue';
+</script>
 <template>
-  <div class='panel'>
-    <h3>MLB Division Leaders</h3>
-    <p>As of MM/DD/YYYY at HH:MM</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Division</th>
-          <th>Leader</th>
-          <th>Games Ahead</th>
-          <th>Owner</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>AL East</td>
-          <td>Yankees</td>
-          <td>0.5</td>
-          <td>Cameron</td>
-        </tr>
-        <tr>
-          <td>AL Central</td>
-          <td>Tigers</td>
-          <td>0.5</td>
-          <td>Cameron</td>
-        </tr>
-        <tr>
-          <td>AL West</td>
-          <td>Rangers</td>
-          <td>0.5</td>
-          <td>Cameron</td>
-        </tr>
-        <tr>
-          <td>NL East</td>
-          <td>Mets</td>
-          <td>1.0</td>
-          <td>Cameron</td>
-        </tr>
-        <tr>
-          <td>NL Central</td>
-          <td>Cubs</td>
-          <td>0.0</td>
-          <td>Cameron</td>
-        </tr>
-        <tr>
-          <td>NL West</td>
-          <td>Padres</td>
-          <td>1.5</td>
-          <td>Cameron</td>
-        </tr>
-      </tbody>
-    </table>
-    <a href='#/mlb-standings'>See full standings →</a>
+  <div class='col-2'>
+    <div>
+      <h2>MLB Division Leaders</h2>
+      <MlbDivisionLeadersTable />
+    </div>
+    <div>
+      <h2>Fantasy Standings</h2>
+      <FantasyStandingsTable />
+    </div>
+  </div>
+  <div class='center'>
+    <h2>Payout History</h2>
+    <PayoutHistoryTable />
   </div>
 </template>
+
+<style scoped>
+  .col-2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .col-2 > div {
+    flex: 1 0 auto; /* Distribute available space equally, initial size auto */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

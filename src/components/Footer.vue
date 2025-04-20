@@ -12,6 +12,6 @@
 
 <template>
   <div class="footer">
-    <p>Copyright &copy; {{creationYearText}}{{year}} Cameron Montesano. All rights reserved.</p>
+    <p>Copyright &copy; {{creationYearText}}{{year}} Montesano Fantasy Baseball. All rights reserved.</p>
   </div>
 </template>
