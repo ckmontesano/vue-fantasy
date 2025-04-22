@@ -1,3 +1,5 @@
+// todo: to be deprecated with introduction of API
+
 import axios from "axios";
 import addAllTeamLogos from "./mlb-team-logos";
 
