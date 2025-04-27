@@ -6,4 +6,20 @@
   text-align: center;
   background: $darkmode-background;
   color: $darkmode-text-primary;
+
+  p {
+    margin: 0;
+  }
+}
+
+@media (width < $breakpoint-lg) {
+  .footer {
+    padding: $spacing-16;
+  }
+}
+
+@media (width < $breakpoint-md) {
+  .footer {
+    padding: $spacing-8;
+  }
 }

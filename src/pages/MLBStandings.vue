@@ -9,7 +9,6 @@
   const mlbStandings = ref(null);
   onMounted(async() => {
     mlbStandings.value = await getMlbStandings();
-    console.log("Updated", mlbStandings.value);
   })
 </script>
 

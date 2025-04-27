@@ -13,53 +13,33 @@
 
 <template>
   <table v-if="mlbStandings">
-    <thead>
-      <tr>
-        <th>Division</th>
-        <th>Leader</th>
-        <th>Owner</th>
-        <th>Division Win Odds</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>American East</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.east.leader.team.id)" />{{mlbStandings.american.east.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.american.east.leader.team.odds}}</td>
-      </tr>
-      <tr>
-        <td>American Central</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.central.leader.team.id)" />{{mlbStandings.american.central.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.american.central.leader.team.odds}}</td>
-      </tr>
-      <tr>
-        <td>American West</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.west.leader.team.id)" />{{mlbStandings.american.west.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.american.west.leader.team.odds}}</td>
-      </tr>
-      <tr>
-        <td>National East</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.east.leader.team.id)" />{{mlbStandings.national.east.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.national.east.leader.team.odds}}</td>
-      </tr>
-      <tr>
-        <td>National Central</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.central.leader.team.id)" />{{mlbStandings.national.central.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.national.central.leader.team.odds}}</td>
-      </tr>
-      <tr>
-        <td>National West</td>
-        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.west.leader.team.id)" />{{mlbStandings.national.west.leader.team.name}}</td>
-        <td></td>
-        <td>+{{mlbStandings.national.west.leader.team.odds}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Division</th>
+      <th>Leader</th>
+      <th>Owner</th>
+      <th>Division Win Odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <template v-for="(league, leagueKey) in mlbStandings" :key="leagueKey">
+      <template v-for="(division, divisionKey) in league" :key="divisionKey">
+        <tr>
+          <td>{{ division.name }}</td>
+          <td class="no-wrap" v-if="division.leader">
+            <img class="team-logo" :src="getTeamLogoURL(division.leader.team.id)" />
+            {{ division.leader.team.name }}
+          </td>
+          <td v-else>—</td>
+          <td v-if="division.leader">{{ division.leader.team.owner || 'Unknown' }}</td>
+          <td v-else>—</td>
+          <td v-if="division.leader">+{{ division.leader.team.odds ?? 'N/A' }}</td>
+          <td v-else>—</td>
+        </tr>
+      </template>
+    </template>
+  </tbody>
+</table>
   <p v-if="!mlbStandings">Loading…</p>
   <a href='#/mlb-standings'>See full standings →</a>
 </template>

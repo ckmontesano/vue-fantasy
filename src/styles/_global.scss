@@ -1,6 +1,7 @@
 @import "./fonts";
 @import "./spacing";
 @import "./colors";
+@import "./breakpoints";
 
 * {
   box-sizing: border-box;
@@ -11,8 +12,10 @@ h1 {
 }
 
 table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
-  border: solid 1px black;
 
   thead tr {
     background: #bdbdbd;

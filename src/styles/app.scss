@@ -5,3 +5,21 @@
   color: $text-primary;
   padding: $spacing-32 $spacing-64 $spacing-64;
 }
+
+@media (width < $breakpoint-lg) {
+  .page {
+    padding: $spacing-16 $spacing-32 $spacing-32;
+  }
+}
+
+@media (width < $breakpoint-md) {
+  .page {
+    padding: $spacing-8 $spacing-24 $spacing-24;
+  }
+}
+
+@media (width < $breakpoint-sm) {
+  .page {
+    padding: $spacing-8;
+  }
+}
