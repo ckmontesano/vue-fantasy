@@ -1,62 +1,66 @@
 <script setup>
+  // dependencies
+  import { ref, onMounted } from "vue"
+  import getMlbStandings from "@/scripts/mlb-standings.js"
+  import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
+  
+  const mlbStandings = ref(null);
+  onMounted(async() => {
+    mlbStandings.value = await getMlbStandings();
+    console.log("mlbStandings", mlbStandings.value)
+  })
 </script>
 
 <template>
-  <table>
+  <table v-if="mlbStandings">
     <thead>
       <tr>
         <th>Division</th>
         <th>Leader</th>
-        <th>GA</th>
         <th>Owner</th>
-        <th>Points</th>
+        <th>Division Win Odds</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>AL East</td>
-        <td>Yankees</td>
-        <td>0.5</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>American East</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.east.leader.team.id)" />{{mlbStandings.american.east.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.american.east.leader.team.odds}}</td>
       </tr>
       <tr>
-        <td>AL Central</td>
-        <td>Tigers</td>
-        <td>0.5</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>American Central</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.central.leader.team.id)" />{{mlbStandings.american.central.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.american.central.leader.team.odds}}</td>
       </tr>
       <tr>
-        <td>AL West</td>
-        <td>Rangers</td>
-        <td>0.5</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>American West</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.american.west.leader.team.id)" />{{mlbStandings.american.west.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.american.west.leader.team.odds}}</td>
       </tr>
       <tr>
-        <td>NL East</td>
-        <td>Mets</td>
-        <td>1.0</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>National East</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.east.leader.team.id)" />{{mlbStandings.national.east.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.national.east.leader.team.odds}}</td>
       </tr>
       <tr>
-        <td>NL Central</td>
-        <td>Cubs</td>
-        <td>0.0</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>National Central</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.central.leader.team.id)" />{{mlbStandings.national.central.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.national.central.leader.team.odds}}</td>
       </tr>
       <tr>
-        <td>NL West</td>
-        <td>Padres</td>
-        <td>1.5</td>
-        <td>Cameron</td>
-        <td>-</td>
+        <td>National West</td>
+        <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(mlbStandings.national.west.leader.team.id)" />{{mlbStandings.national.west.leader.team.name}}</td>
+        <td></td>
+        <td>+{{mlbStandings.national.west.leader.team.odds}}</td>
       </tr>
     </tbody>
   </table>
+  <p v-if="!mlbStandings">Loading…</p>
   <a href='#/mlb-standings'>See full standings →</a>
 </template>
 

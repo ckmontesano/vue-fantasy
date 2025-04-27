@@ -30,7 +30,6 @@
       </tr>
     </tbody>
   </table>
-  <a href='#/fantasy-points-breakdown'>See points breakdown →</a>
 </template>
 
 <style scoped>

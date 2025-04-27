@@ -8,8 +8,6 @@
   const mlbStandings = ref(null);
   onMounted(async() => {
     mlbStandings.value = await getMlbStandings();
-  console.log(mlbStandings.value);
-
   })
 
 </script>

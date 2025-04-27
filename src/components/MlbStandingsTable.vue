@@ -1,5 +1,6 @@
 <script setup>
   const { division } = defineProps(['division'])
+  import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
 </script>
 
 <template>
@@ -10,7 +11,8 @@
       <thead>
         <tr>
           <th>Team</th>
-          <th>OTWD</th>
+          <th>COTWD</th>
+          <th>OOTWD</th>
           <th>Owner</th>
           <th>Wins</th>
           <th>Losses</th>
@@ -23,8 +25,9 @@
       </thead>
       <tbody>
         <tr v-for="team in division.standings" :key="team.id">
-          <td class='no-wrap'><img class="team-logo" :src="team.logo" />{{team.team.name}}</td>
-          <td>-</td>
+          <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(team.team.id)" />{{team.team.name}}</td>
+          <td></td>
+          <td>+{{ team.team.odds }}</td>
           <td>-</td>
           <td>{{team.wins}}</td>
           <td>{{team.losses}}</td>
@@ -38,3 +41,9 @@
     </table>
   </div>
 </template>
+
+<style scoped>
+  table {
+    margin-bottom: 28px;
+  }
+</style>

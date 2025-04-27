@@ -1,0 +1,125 @@
+{
+  "date_last_updated": "2025-03-10T02:35:00Z",
+  "teams": [
+    {
+      "team_id": 147,
+      "odds": 125
+    },
+    {
+      "team_id": 110,
+      "odds": 270
+    },
+    {
+      "team_id": 111,
+      "odds": 330
+    },
+    {
+      "team_id": 139,
+      "odds": 850
+    },
+    {
+      "team_id": 141,
+      "odds": 1300
+    },
+    {
+      "team_id": 142,
+      "odds": 210
+    },
+    {
+      "team_id": 116,
+      "odds": 250
+    },
+    {
+      "team_id": 118,
+      "odds": 280
+    },
+    {
+      "team_id": 114,
+      "odds": 310
+    },
+    {
+      "team_id": 145,
+      "odds": 25000
+    },
+    {
+      "team_id": 117,
+      "odds": 180
+    },
+    {
+      "team_id": 140,
+      "odds": 190
+    },
+    {
+      "team_id": 136,
+      "odds": 200
+    },
+    {
+      "team_id": 108,
+      "odds": 2100
+    },
+    {
+      "team_id": 133,
+      "odds": 2500
+    },
+    {
+      "team_id": 144,
+      "odds": 135
+    },
+    {
+      "team_id": 143,
+      "odds": 180
+    },
+    {
+      "team_id": 121,
+      "odds": 210
+    },
+    {
+      "team_id": 120,
+      "odds": 10000
+    },
+    {
+      "team_id": 146,
+      "odds": 25000
+    },
+    {
+      "team_id": 112,
+      "odds": 100
+    },
+    {
+      "team_id": 158,
+      "odds": 290
+    },
+    {
+      "team_id": 113,
+      "odds": 490
+    },
+    {
+      "team_id": 138,
+      "odds": 850
+    },
+    {
+      "team_id": 134,
+      "odds": 1000
+    },
+    {
+      "team_id": 119,
+      "odds": 100
+    },
+    {
+      "team_id": 135,
+      "odds": 950
+    },
+    {
+      "team_id": 109,
+      "odds": 1000
+    },
+    {
+      "team_id": 137,
+      "odds": 3700
+    },
+    {
+      "team_id": 115,
+      "odds": 50000
+    }
+  ]
+}

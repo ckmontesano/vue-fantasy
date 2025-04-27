@@ -1,22 +1,37 @@
-// todo: to be deprecated with introduction of API
-
 import axios from "axios";
-import addAllTeamLogos from "./mlb-team-logos";
+import attachDivisionOdds from "@/scripts/mlb-division-odds";
+import attachTeamOwners from "@/scripts/fantasy-team-owners";
 
-const AL_API = "https://statsapi.mlb.com/api/v1/standings?leagueId=103";
-const NL_API = "https://statsapi.mlb.com/api/v1/standings?leagueId=104";
+const AL_API =
+  "https://statsapi.mlb.com/api/v1/standings?leagueId=103&season=2025";
+const NL_API =
+  "https://statsapi.mlb.com/api/v1/standings?leagueId=104&season=2025";
+
+function attachDivisionLeaders(mlbStandings) {
+  if (!mlbStandings) return;
+
+  for (const league of Object.values(mlbStandings)) {
+    for (const division of Object.values(league)) {
+      division.leader = division.standings.find(
+        (team) => team.divisionLeader === true
+      );
+    }
+  }
+
+  return mlbStandings;
+}
 
 async function getMlbStandings() {
   var mlbStandings = {
     american: {
-      east: { name: "AL East", standings: [] },
-      central: { name: "AL Central", standings: [] },
-      west: { name: "AL West", standings: [] },
+      east: { name: "American League East", standings: [] },
+      central: { name: "American League Central", standings: [] },
+      west: { name: "American League West", standings: [] },
     },
     national: {
-      east: { name: "NL East", standings: [] },
-      central: { name: "NL Central", standings: [] },
-      west: { name: "NL West", standings: [] },
+      east: { name: "National League East", standings: [] },
+      central: { name: "National League Central", standings: [] },
+      west: { name: "National League West", standings: [] },
     },
   };
 
@@ -31,7 +46,10 @@ async function getMlbStandings() {
   mlbStandings.national.central.standings = nlRes.data.records[1].teamRecords;
   mlbStandings.national.west.standings = nlRes.data.records[2].teamRecords;
 
-  mlbStandings = await addAllTeamLogos(mlbStandings);
+  // add extras for app
+  mlbStandings = attachDivisionOdds(mlbStandings);
+  mlbStandings = attachDivisionLeaders(mlbStandings);
+  mlbStandings = attachTeamOwners(mlbStandings);
 
   return mlbStandings;
 }
