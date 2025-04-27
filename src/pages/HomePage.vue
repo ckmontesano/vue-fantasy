@@ -5,6 +5,7 @@
   import PayoutHistoryTable from '@/components/PayoutHistoryTable.vue';
 </script>
 <template>
+  <h1>Home</h1>
   <div class='col-2'>
     <div>
       <h2>MLB Division Leaders</h2>
