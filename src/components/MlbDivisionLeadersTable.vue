@@ -7,7 +7,6 @@
   const mlbStandings = ref(null);
   onMounted(async() => {
     mlbStandings.value = await getMlbStandings();
-    console.log("mlbStandings", mlbStandings.value)
   })
 </script>
 
@@ -31,7 +30,7 @@
             {{ division.leader.team.name }}
           </td>
           <td v-else>—</td>
-          <td v-if="division.leader">{{ division.leader.team.owner || 'Unknown' }}</td>
+          <td v-if="division.leader">{{ division.leader.team.owner || 'Undrafted' }}</td>
           <td v-else>—</td>
           <td v-if="division.leader">+{{ division.leader.team.odds ?? 'N/A' }}</td>
           <td v-else>—</td>

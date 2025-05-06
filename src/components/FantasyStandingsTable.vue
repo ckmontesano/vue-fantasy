@@ -1,40 +1,65 @@
+<script setup>
+// dependencies
+import { ref, onMounted } from "vue";
+import getMlbStandings from "@/scripts/mlb-standings.js";
+
+const mlbStandings = ref(null);
+const points = ref({
+    Cameron: 0,
+    Caden: 0,
+    Jack: 0,
+    Dad: 0,
+  });
+
+onMounted(async () => {
+  mlbStandings.value = await getMlbStandings();
+
+  Object.values(mlbStandings.value).forEach((league) => {
+    Object.values(league).forEach((division) => {
+      const team = division.leader.team;
+      switch (team.owner) {
+        case "Cameron":
+          points.value.Cameron += team.odds;
+          break;
+        case "Caden":
+          points.value.Caden += team.odds;
+          break;
+        case "Jack":
+          points.value.Jack += team.odds;
+          break;
+        case "Dad":
+          points.value.Dad += team.odds;
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  console.log(points);
+});
+</script>
+
 <template>
   <table>
     <thead>
       <tr>
         <th>Team</th>
         <th>Points</th>
-        <th>Movement</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Cameron</td>
-        <td>3000</td>
-        <td style='color: green'>↑ 1</td>
-      </tr>
-      <tr>
-        <td>Cade</td>
-        <td>2000</td>
-        <td style='color: green'>↑ 2</td>
-      </tr>
-      <tr>
-        <td>Jack</td>
-        <td>1240</td>
-        <td style='color: red'>↓ 3</td>
-      </tr>
-      <tr>
-        <td>Dad</td>
-        <td>0</td>
-        <td style='color: red'>↓ 2</td>
+      <tr v-for="(person, personKey) in Object.entries(points).sort((a, b) => b[1] - a[1])" :key="personKey">
+        <td>{{ person[0] }}</td>
+        <td>{{ person[1] }}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <style scoped>
-  a {
-    display: block;
-    margin-top: 10px;
-  }
+a {
+  display: block;
+  margin-top: 10px;
+}
 </style>
