@@ -1,8 +1,6 @@
 <script setup>
   const { division } = defineProps(['division'])
   import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
-
-  console.log(division)
 </script>
 
 <template>
@@ -14,10 +12,9 @@
         <tr>
           <th>Team</th>
           <th>Owner</th>
-          <th>COTWD</th>
           <th>OOTWD</th>
-          <th>Wins</th>
-          <th>Losses</th>
+          <th>W</th>
+          <th>L</th>
           <th>PCT</th>
           <th>GB</th>
           <th>Home</th>
@@ -30,7 +27,6 @@
           <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(team.team.id)" />{{team.team.name}}</td>
           <td>{{ team.team.owner }}</td>
           <td>+{{ team.team.odds }}</td>
-          <td></td>
           <td>{{team.wins}}</td>
           <td>{{team.losses}}</td>
           <td>{{team.winningPercentage}}</td>

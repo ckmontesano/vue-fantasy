@@ -6,29 +6,43 @@
   import TeamOwnershipTable from "@/components/TeamOwnershipTable.vue";
 
   const mlbStandings = ref(null);
+  const teams = ref({
+    Cameron: [],
+    Caden: [],
+    Jack: [],
+    Dad: [],
+  })
   onMounted(async() => {
     mlbStandings.value = await getMlbStandings();
+    Object.values(mlbStandings.value).forEach((league) => {
+      Object.values(league).forEach((division) => {
+        division.standings.forEach(team => {
+          switch (team.team.owner) {
+            case "Cameron":
+              teams.value.Cameron.push(team);
+              break;
+            case "Caden":
+              teams.value.Caden.push(team);
+              break;
+            case "Jack":
+              teams.value.Jack.push(team);
+              break;
+            case "Dad":
+              teams.value.Dad.push(team);
+              break;
+            default:
+              break;
+          }
+        })
+      });
+    });
   })
-
 </script>
 
 <template>
   <h1>Teams</h1>
-  <div>
-    <h2>Cameron</h2>
-    <TeamOwnershipTable />
+  <div v-for="(teams, person) in teams" :key="person">
+    <h2>{{  person  }}</h2>
+    <TeamOwnershipTable :teams="teams" />
   </div>
-  <div>
-    <h2>Cade</h2>
-    <TeamOwnershipTable />
-  </div>
-  <div>
-    <h2>Jack</h2>
-    <TeamOwnershipTable />
-  </div>
-  <div>
-    <h2>Dad</h2>
-    <TeamOwnershipTable />
-  </div>
-
 </template>

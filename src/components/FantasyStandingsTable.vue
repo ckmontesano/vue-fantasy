@@ -50,7 +50,9 @@ onMounted(async () => {
     </thead>
     <tbody>
       <tr v-for="(person, personKey) in Object.entries(points).sort((a, b) => b[1] - a[1])" :key="personKey">
-        <td>{{ person[0] }}</td>
+        <td>
+          <img src="@/assets/crown.png" />
+          {{ person[0] }}</td>
         <td>{{ person[1] }}</td>
       </tr>
     </tbody>
@@ -61,5 +63,20 @@ onMounted(async () => {
 a {
   display: block;
   margin-top: 10px;
+}
+tbody tr:first-child {
+  font-weight: bold;
+}
+tbody tr:not(:first-child) {
+  background: #e6e6e6;
+}
+/* crown icon */
+tbody tr td img {
+  height: 1.2em;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+tbody tr:not(:first-child) td:first-child img{
+  display: none;
 }
 </style>
