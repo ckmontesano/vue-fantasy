@@ -17,11 +17,6 @@ table {
   overflow-x: auto;
   border-collapse: collapse;
 
-  thead tr {
-    background: #bdbdbd;
-    font-weight: $font-bold;
-  }
-
   th,
   td {
     text-align: left;
@@ -37,6 +32,17 @@ table {
 
     &.no-wrap {
       white-space: nowrap;
+    }
+  }
+
+  thead {
+    tr {
+      background: #bdbdbd;
+      font-weight: $font-bold;
+
+      th {
+        white-space: nowrap;
+      }
     }
   }
 }

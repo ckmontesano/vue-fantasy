@@ -8,12 +8,12 @@
   <h1>Home</h1>
   <div class='col-2'>
     <div>
-      <h2>MLB Division Leaders</h2>
-      <MlbDivisionLeadersTable />
-    </div>
-    <div>
       <h2>Fantasy Standings</h2>
       <FantasyStandingsTable />
+    </div>
+    <div>
+      <h2>MLB Division Leaders</h2>
+      <MlbDivisionLeadersTable />
     </div>
   </div>
   <div class='center'>
@@ -39,5 +39,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 45px;
+  }
+
+  @media (max-width: 768px) {
+    .col-2, .center {
+      display: unset;
+    }
   }
 </style>

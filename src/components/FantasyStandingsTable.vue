@@ -57,6 +57,8 @@ onMounted(async () => {
       </tr>
     </tbody>
   </table>
+  <p v-if="!mlbStandings">Loading…</p>
+  <a href='#/teams'>See team ownerships →</a>
 </template>
 
 <style scoped>
