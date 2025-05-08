@@ -16,9 +16,7 @@ import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
     <tbody>
       <tr
         v-for="(team, index) in teams.slice().sort((a, b) => a.divisionRank - b.divisionRank)"
-        :key="index"
-        v-bind:class="{ firstPlace: team.divisionRank === 1 }"
-      >
+        :key="index">
         <td class="no-wrap">
           <img class="team-logo" :src="getTeamLogoURL(team.team.id)" />
           {{ team.team.name }}
@@ -30,9 +28,3 @@ import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
     </tbody>
   </table>
 </template>
-
-<style scoped>
-.firstPlace {
-  font-weight: bold;
-}
-</style>
