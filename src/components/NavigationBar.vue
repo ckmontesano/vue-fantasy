@@ -1,8 +1,11 @@
 <script setup>
+  import { ref } from 'vue'
   import '@/styles/NavigationBar.css'
   import baseballIcon from '@/assets/baseball.png'
 
   const year = new Date().getFullYear();
+
+  const mobileNavHidden = ref(true);
 </script>
 
 <template>
@@ -13,16 +16,19 @@
         <span class='main'>Montesano</span>
         <span class='secondary'>Fantasy Baseball {{year}}</span>
       </div>
+      <div class='mobile-menu-toggle' @click="mobileNavHidden = !mobileNavHidden">
+        <img src="@/assets/hamburger.png" draggable="false" />
+      </div>
     </div>
-    <ul class='options'>
+    <ul class='options' :class="{ 'mobile-hidden': mobileNavHidden }">
       <li class='item'>
-        <a href='#/'>Home</a>
+        <a @click="mobileNavHidden = true" href='#/'>Home</a>
       </li>
       <li class='item'>
-        <a href='#/teams'>Teams</a>
+        <a @click="mobileNavHidden = true" href='#/teams'>Teams</a>
       </li>
       <li class='item'>
-        <a href='#/mlb-standings'>MLB Standings</a>
+        <a @click="mobileNavHidden = true" href='#/mlb-standings'>MLB Standings</a>
       </li>
     </ul>
     <!--
@@ -35,3 +41,30 @@
     <p>Last MLB data update: 6/12/2025 at 8:15pm</p>
   </div>
 </template>
+
+<style scoped>
+  .branding {
+    position: relative;
+  }
+  .mobile-menu-toggle {
+    display: none;
+    height: 100%;
+    aspect-ratio: 1/1;
+    padding: 18px;
+    position: absolute;
+    right: 0;
+  }
+  .mobile-menu-toggle img {
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: block;
+    }
+    .mobile-hidden {
+      display: none;
+    }
+  }
+  
+</style>

@@ -1,5 +1,15 @@
 @import "./global";
 
+#app {
+  font-size: 14px;
+}
+
+@media (width < $breakpoint-md) {
+  #app {
+    font-size: 12px;
+  }
+}
+
 .page {
   background-color: $foreground;
   color: $text-primary;

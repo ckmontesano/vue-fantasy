@@ -8,6 +8,7 @@
   background: $darkmode-background;
   color: $darkmode-text-primary;
   height: 64px;
+  z-index: 999;
 
   .branding {
     display: flex;
@@ -51,4 +52,38 @@
   padding: $spacing-8 $spacing-0;
   background-color: $modal;
   text-align: center;
+  display: none;
+}
+
+@media (width < $breakpoint-lg) {
+  .navigation-bar {
+    padding: $spacing-0 $spacing-32;
+  }
+}
+
+@media (width < $breakpoint-md) {
+  .navigation-bar {
+    padding: $spacing-0 $spacing-24;
+    display: block;
+
+    .branding {
+      height: 100%;
+    }
+
+    .options {
+      flex-direction: column;
+      position: relative;
+      background: $modal;
+      padding: $spacing-16 $spacing-32;
+      align-items: flex-end;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+@media (width < $breakpoint-sm) {
+  .navigation-bar {
+    padding: $spacing-0 $spacing-8;
+  }
 }
