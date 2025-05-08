@@ -6,45 +6,47 @@
 </script>
 <template>
   <h1>Home</h1>
-  <div class='col-2'>
-    <div>
+  <div class="sections-container">
+    <div class="section">
       <h2>Fantasy Standings</h2>
       <FantasyStandingsTable />
     </div>
-    <div>
+    <div class="section mlb-section">
       <h2>MLB Division Leaders</h2>
       <MlbDivisionLeadersTable />
     </div>
-  </div>
-  <div class='center'>
-    <h2>Payout History</h2>
-    <PayoutHistoryTable />
+    <div class="section">
+      <h2>Payout History</h2>
+      <PayoutHistoryTable />
+    </div>
   </div>
 </template>
 
 <style scoped>
-  .col-2 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  .sections-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
   }
 
-  .col-2 > div {
-    flex: 1 0 auto; /* Distribute available space equally, initial size auto */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  .section {
+    min-width: 0; /* Prevents overflow issues */
   }
 
-  .center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 45px;
+  @media (max-width: 1200px) {
+    .sections-container {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .mlb-section {
+      grid-column: 1 / -1; /* Spans all columns */
+    }
   }
 
   @media (max-width: 768px) {
-    .col-2, .center {
-      display: unset;
+    .sections-container {
+      grid-template-columns: 1fr;
     }
   }
 </style>

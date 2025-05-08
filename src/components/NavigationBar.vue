@@ -30,6 +30,9 @@
       <li class='item'>
         <a @click="mobileNavHidden = true" href='#/mlb-standings'>MLB Standings</a>
       </li>
+      <li class='item'>
+        <a @click="mobileNavHidden = true" href='https://mlb.tv' target='_blank'>MLB.TV</a>
+      </li>
     </ul>
     <!--
       todo: work in authentication at some point

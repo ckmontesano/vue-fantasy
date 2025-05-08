@@ -76,6 +76,7 @@
     border-radius: 2px;
     font-size: 14px;
     transition: all 0.2s ease;
+    outline: none;
   }
 
   .tabs button.active {
