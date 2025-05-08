@@ -52,18 +52,25 @@
   .mobile-menu-toggle {
     display: none;
     height: 100%;
+    max-height: 48px;
     aspect-ratio: 1/1;
-    padding: 18px;
+    padding: 12px;
     position: absolute;
     right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .mobile-menu-toggle img {
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   @media (max-width: 768px) {
     .mobile-menu-toggle {
-      display: block;
+      display: flex;
+      padding: 8px;
     }
     .mobile-hidden {
       display: none;
