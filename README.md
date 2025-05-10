@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple fantasy baseball app built with VueJS. It is a work in progress and is not yet fully functional.
+This is a simple fantasy baseball app built with VueJS. It is a work in progress.
 
 ## Dev Resources
 
