@@ -1,5 +1,5 @@
 <script setup>
-  import "@/styles/Footer.css"
+  import "@/styles/Footer.scss"
 
   const creationYear = 2023
   const year = new Date().getFullYear()

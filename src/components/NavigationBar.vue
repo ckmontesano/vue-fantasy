@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue'
-  import '@/styles/NavigationBar.css'
+  import '@/styles/NavigationBar.scss'
   import baseballIcon from '@/assets/baseball.png'
 
   const year = new Date().getFullYear();
