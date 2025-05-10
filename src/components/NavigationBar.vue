@@ -50,14 +50,13 @@
     position: relative;
   }
   .mobile-menu-toggle {
-    display: none;
+    display: none;  /* Hidden by default */
     height: 100%;
     max-height: 48px;
     aspect-ratio: 1/1;
     padding: 12px;
     position: absolute;
     right: 0;
-    display: flex;
     align-items: center;
     justify-content: center;
   }

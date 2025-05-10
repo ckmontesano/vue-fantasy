@@ -20,7 +20,7 @@ onMounted(async () => {
       payoutHistory.value.push({
         date: formattedDate,
         winner: winner,
-        amount: "$20",
+        amount: "$80",
       });
     }
   }
