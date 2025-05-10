@@ -1,7 +1,7 @@
-@import "./fonts";
-@import "./spacing";
-@import "./colors";
-@import "./breakpoints";
+@use "./fonts" as *;
+@use "./spacing" as *;
+@use "./colors" as *;
+@use "./breakpoints" as *;
 
 * {
   box-sizing: border-box;

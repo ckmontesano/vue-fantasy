@@ -1,6 +1,6 @@
 <script setup>
   // dependencies & components
-  import '@/styles/app.css';
+  import '@/styles/app.scss';
   import NavigationBar from '@/components/NavigationBar.vue'
   import Footer from '@/components/Footer.vue';
 

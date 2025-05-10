@@ -10,5 +10,18 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@/styles/colors" as *;
+          @use "@/styles/spacing" as *;
+          @use "@/styles/breakpoints" as *;
+          @use "@/styles/fonts" as *;
+          @use "@/styles/global" as *;
+        `,
+      },
+    },
+  },
   base: "/",
 });
