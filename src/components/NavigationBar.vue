@@ -96,7 +96,7 @@
     white-space: nowrap;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .mobile-menu-toggle {
       display: flex;
       padding: 8px;
@@ -109,7 +109,7 @@
       right: 0;
       flex-direction: column;
       background: #f2f2f2;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
       z-index: 1;
       padding: 1rem 0;
       white-space: normal;

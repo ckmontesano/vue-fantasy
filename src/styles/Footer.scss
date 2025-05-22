@@ -4,11 +4,12 @@
   width: 100%;
   padding: $spacing-32 $spacing-64 $spacing-96 $spacing-64;
   text-align: center;
-  background: $darkmode-background;
-  color: $darkmode-text-primary;
+  background: #d8d8d8;
+  color: $text-primary;
 
   p {
     margin: 0;
+    opacity: 0.8;
   }
 }
 
