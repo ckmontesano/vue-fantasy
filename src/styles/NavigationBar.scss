@@ -3,7 +3,7 @@
 .navigation-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: $spacing-0 $spacing-64;
   background: $darkmode-background;
   color: $darkmode-text-primary;
@@ -13,6 +13,16 @@
   top: 0;
   left: 0;
   right: 0;
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+    padding: $spacing-0 $spacing-64;
+    height: 100%;
+  }
 
   .branding {
     display: flex;
@@ -86,14 +96,17 @@
 
 @media (width < $breakpoint-lg) {
   .navigation-bar {
-    padding: $spacing-0 $spacing-32;
+    .nav-wrapper {
+      padding: $spacing-0 $spacing-32;
+    }
   }
 }
 
 @media (width < $breakpoint-md) {
   .navigation-bar {
-    padding: $spacing-0 $spacing-24;
-    display: block;
+    .nav-wrapper {
+      padding: $spacing-0 $spacing-24;
+    }
 
     .branding {
       height: 100%;
@@ -145,6 +158,8 @@
 
 @media (width < $breakpoint-sm) {
   .navigation-bar {
-    padding: $spacing-0 $spacing-8;
+    .nav-wrapper {
+      padding: $spacing-0 $spacing-8;
+    }
   }
 }
