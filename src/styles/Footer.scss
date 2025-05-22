@@ -2,7 +2,7 @@
 
 .footer {
   width: 100%;
-  padding: $spacing-32;
+  padding: $spacing-32 $spacing-64 $spacing-96 $spacing-64;
   text-align: center;
   background: $darkmode-background;
   color: $darkmode-text-primary;
@@ -14,12 +14,12 @@
 
 @media (width < $breakpoint-lg) {
   .footer {
-    padding: $spacing-16;
+    padding: $spacing-32 $spacing-32 $spacing-64 $spacing-32;
   }
 }
 
 @media (width < $breakpoint-md) {
   .footer {
-    padding: $spacing-8;
+    padding: $spacing-16 $spacing-24 $spacing-32 $spacing-24;
   }
 }

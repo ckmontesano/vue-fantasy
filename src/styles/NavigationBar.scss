@@ -9,6 +9,10 @@
   color: $darkmode-text-primary;
   height: 64px;
   z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   .branding {
     display: flex;
@@ -39,11 +43,31 @@
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    gap: $spacing-16;
+    gap: $spacing-8;
+
+    .item {
+      position: relative;
+    }
 
     .item a {
       color: $darkmode-text-primary;
       font-weight: $font-bold;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $darkmode-text-primary;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 }
@@ -53,6 +77,11 @@
   background-color: $modal;
   text-align: center;
   display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 998;
 }
 
 @media (width < $breakpoint-lg) {
@@ -72,12 +101,44 @@
 
     .options {
       flex-direction: column;
-      position: relative;
-      background: $modal;
+      position: absolute;
+      background: $foreground;
       padding: $spacing-16 $spacing-32;
       align-items: flex-end;
       width: 100%;
       margin: 0;
+      top: 64px;
+      left: 0;
+      right: 0;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+      gap: 0;
+      height: auto;
+
+      .item {
+        position: static;
+      }
+
+      .item a {
+        color: $text-primary;
+        font-weight: $font-medium;
+        padding: $spacing-8 0;
+        display: block;
+        width: 100%;
+        text-align: right;
+        border-bottom: 1px solid rgb(0 0 0 / 10%);
+
+        &::after {
+          display: none;
+        }
+
+        &:hover {
+          color: $secondary-text;
+        }
+      }
+
+      .item:last-child a {
+        border-bottom: none;
+      }
     }
   }
 }

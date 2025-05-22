@@ -5,9 +5,14 @@
 
   // components
   import MLBStandingsTable from "@/components/MlbStandingsTable.vue";
+  import TabsComponent from '@/components/TabsComponent.vue';
   
   const mlbStandings = ref(null);
   const activeTab = ref('american');
+  const tabs = [
+    { id: 'american', label: 'American League' },
+    { id: 'national', label: 'National League' }
+  ];
 
   onMounted(async() => {
     mlbStandings.value = await getMlbStandings();
@@ -16,20 +21,10 @@
 
 <template>
   <h1>MLB Standings</h1>
-  <div class="tabs">
-    <button 
-      :class="{ active: activeTab === 'american' }" 
-      @click="activeTab = 'american'"
-    >
-      American League
-    </button>
-    <button 
-      :class="{ active: activeTab === 'national' }" 
-      @click="activeTab = 'national'"
-    >
-      National League
-    </button>
-  </div>
+  <TabsComponent
+    v-model="activeTab"
+    :tabs="tabs"
+  />
 
   <div v-if="activeTab === 'american' && mlbStandings">
     <MLBStandingsTable :division="mlbStandings.american.east" />
@@ -59,32 +54,5 @@
     padding: 0;
     list-style: none;
     text-align: left;
-  }
-
-  .tabs {
-    margin: 16px 0;
-    display: flex;
-    gap: 8px;
-  }
-
-  .tabs button {
-    padding: 6px 12px;
-    border: 1px solid #000;
-    background: #e0e0e0;
-    color: #000;
-    cursor: pointer;
-    border-radius: 2px;
-    font-size: 14px;
-    transition: all 0.2s ease;
-    outline: none;
-  }
-
-  .tabs button.active {
-    background: #000;
-    color: #fff;
-  }
-
-  .tabs button:hover:not(.active) {
-    background: #d0d0d0;
   }
 </style>

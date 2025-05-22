@@ -12,11 +12,11 @@
         <tr>
           <th>Team</th>
           <th>Owner</th>
+          <th>GB</th>
           <th>OOTWD</th>
           <th>W</th>
           <th>L</th>
           <th>PCT</th>
-          <th>GB</th>
           <th>Home</th>
           <th>Away</th>
           <th>L10</th>
@@ -26,11 +26,11 @@
         <tr v-for="team in division.standings" :key="team.id">
           <td class='no-wrap'><img class="team-logo" :src="getTeamLogoURL(team.team.id)" />{{team.team.name}}</td>
           <td>{{ team.team.owner }}</td>
+          <td>{{team.gamesBack}}</td>
           <td>+{{ team.team.odds }}</td>
           <td>{{team.wins}}</td>
           <td>{{team.losses}}</td>
           <td>{{team.winningPercentage}}</td>
-          <td>{{team.gamesBack}}</td>
           <td class='no-wrap'>{{team.records.splitRecords[0].wins}}-{{team.records.splitRecords[0].losses}}</td>
           <td class='no-wrap'>{{team.records.splitRecords[1].wins}}-{{team.records.splitRecords[1].losses}}</td>
           <td class='no-wrap'>{{team.records.splitRecords[8].wins}}-{{team.records.splitRecords[8].losses}}</td>
