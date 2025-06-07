@@ -34,6 +34,7 @@ $nav-underline-offset: 2px;
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    gap: $spacing-32;
   }
 
   // Branding
@@ -44,10 +45,10 @@ $nav-underline-offset: 2px;
     color: inherit;
     cursor: pointer;
     position: relative;
-    width: 100%;
     font-size: 1.2em;
     font-weight: $font-light;
     gap: $spacing-8;
+    flex-shrink: 0;
 
     .logo {
       height: $nav-logo-size;
@@ -95,6 +96,7 @@ $nav-underline-offset: 2px;
     padding: 0;
     white-space: nowrap;
     gap: $spacing-8;
+    flex-shrink: 0;
 
     .item {
       margin: 0 1rem;
@@ -108,6 +110,7 @@ $nav-underline-offset: 2px;
       white-space: nowrap;
       font-weight: $font-bold;
       position: relative;
+      transition: color 0.2s ease;
 
       // Desktop hover underline effect
       &::after {
@@ -127,7 +130,7 @@ $nav-underline-offset: 2px;
     }
   }
 
-  // Mobile Hidden State
+  // Mobile Hidden State - used for mobile menu toggle
   .mobile-hidden {
     display: none;
   }
@@ -156,6 +159,11 @@ $nav-underline-offset: 2px;
       max-width: 1280px;
       padding: $spacing-0 $spacing-64;
     }
+
+    // Override mobile-hidden on desktop to always show nav
+    .mobile-hidden {
+      display: flex !important;
+    }
   }
 }
 
@@ -175,6 +183,10 @@ $nav-underline-offset: 2px;
 
     .nav-wrapper {
       padding: 0;
+    }
+
+    .branding {
+      width: 100%; // Only take full width on mobile
     }
 
     .mobile-menu-toggle {
