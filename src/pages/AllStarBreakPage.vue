@@ -1,9 +1,8 @@
 <script setup>
 // dependencies
-import axios from "axios";
 import { ref, onMounted } from "vue";
-import getMlbStandings from "@/scripts/mlb-standings.js";
 import TabsComponent from "@/components/TabsComponent.vue";
+import { getAllStarBreakData } from "@/scripts/allstar-break-logic.js";
 
 // Tabs setup
 const tabs = [
@@ -14,9 +13,6 @@ const activeTab = ref("allstar");
 function updateActiveTab(tabId) {
   activeTab.value = tabId;
 }
-
-const statsApiURL = "https://statsapi.mlb.com/api";
-const asgDate = "07/15/2025";
 
 // League tabs for mobile
 const leagueTabs = [
@@ -32,68 +28,11 @@ const mlbStandings = ref(null);
 const allStarPlayers = ref([]);
 const ownerPoints = ref({});
 
-async function getTeamLeague(teamId) {
-  const res = await axios.get(`${statsApiURL}/v1/teams/${teamId}`);
-
-  return res?.data?.teams[0].league.name;
-}
-
-async function attachPlayerTeamsAndLeagues(asgRoster) {
-  // Helper to get owner from mlbStandings for a given teamId
-  function getOwnerByTeamId(teamId) {
-    if (!mlbStandings.value) return null;
-    for (const leagueKey in mlbStandings.value) {
-      const league = mlbStandings.value[leagueKey];
-      for (const divisionKey in league) {
-        const division = league[divisionKey];
-        for (const standing of Object.values(division.standings)) {
-          if (standing.team.id === teamId) {
-            return standing.team.owner || null;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  // Points logic: 6 points per player, 6 extra if their league wins (not implemented here)
-  const pointsPerPlayer = 6;
-  const pointsByOwner = {};
-
-  // Attach team/league and accumulate points
-  for (const player of asgRoster) {
-    const res = await axios.get(
-      `${statsApiURL}/v1/people/${player.id}?hydrate=currentTeam`
-    );
-    if (!res.data.people[0].currentTeam) continue;
-    player.teamName = res.data.people[0].currentTeam.name;
-    player.asgTeamName = await getTeamLeague(res.data.people[0].currentTeam.id);
-    player.owner = getOwnerByTeamId(res.data.people[0].currentTeam.id);
-    // Add points to owner
-    if (player.owner) {
-      pointsByOwner[player.owner] =
-        (pointsByOwner[player.owner] || 0) + pointsPerPlayer;
-    }
-  }
-  ownerPoints.value = pointsByOwner;
-  return asgRoster;
-}
-
 onMounted(async () => {
-  console.clear(); // todo: remove this
-  mlbStandings.value = await getMlbStandings();
-  console.log(mlbStandings.value);
-
-  const asgRes = await axios.get(`${statsApiURL}/v1.1/game/778566/feed/live`);
-
-  Object.values(asgRes.data.gameData.players).forEach((player) => {
-    allStarPlayers.value.push(player);
-  });
-
-  // console.log(allStarPlayers.value);
-  allStarPlayers.value = await attachPlayerTeamsAndLeagues(
-    allStarPlayers.value
-  );
+  const { mlbStandings: standings, allStarPlayers: players, ownerPoints: points } = await getAllStarBreakData();
+  mlbStandings.value = standings;
+  allStarPlayers.value = players;
+  ownerPoints.value = points;
 });
 </script>
 
