@@ -7,6 +7,7 @@
   // pages
   import HomePage from '@/pages/HomePage.vue';
   import TeamsPage from '@/pages/TeamsPage.vue';
+  import AllStarBreakPage from '@/pages/AllStarBreakPage.vue';
   import MLBStandings from '@/pages/MLBStandings.vue';
   import NotFound from '@/pages/NotFound.vue';
 
@@ -15,6 +16,7 @@
   const routes = {
     '/': HomePage,
     '/teams': TeamsPage,
+    '/all-star-break': AllStarBreakPage,
     '/mlb-standings': MLBStandings,
   }
   const currentPath = ref(window.location.hash)

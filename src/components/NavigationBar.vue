@@ -29,6 +29,9 @@
           <a @click="mobileNavHidden = true" href='#/teams'>Teams</a>
         </li>
         <li class='item'>
+          <a @click="mobileNavHidden = true" href='#/all-star-break'>All-Star Break</a>
+        </li>
+        <li class='item'>
           <a @click="mobileNavHidden = true" href='#/mlb-standings'>MLB Standings</a>
         </li>
         <li class='item'>
