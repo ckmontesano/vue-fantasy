@@ -29,7 +29,11 @@ const allStarPlayers = ref([]);
 const ownerPoints = ref({});
 
 onMounted(async () => {
-  const { mlbStandings: standings, allStarPlayers: players, ownerPoints: points } = await getAllStarBreakData();
+  const {
+    mlbStandings: standings,
+    allStarPlayers: players,
+    ownerPoints: points,
+  } = await getAllStarBreakData();
   mlbStandings.value = standings;
   allStarPlayers.value = players;
   ownerPoints.value = points;

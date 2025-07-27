@@ -35,7 +35,10 @@ export async function getAllStarBreakData() {
     try {
       const cachedObj = JSON.parse(cachedStandingsRaw);
       const now = Date.now();
-      if (cachedObj.timestamp && (now - cachedObj.timestamp < MLB_STANDINGS_EXPIRATION)) {
+      if (
+        cachedObj.timestamp &&
+        now - cachedObj.timestamp < MLB_STANDINGS_EXPIRATION
+      ) {
         mlbStandings = cachedObj.data;
         cacheValid = true;
       }
@@ -45,7 +48,10 @@ export async function getAllStarBreakData() {
   }
   if (!cacheValid) {
     mlbStandings = await getMlbStandings();
-    localStorage.setItem(MLB_STANDINGS_KEY, JSON.stringify({ data: mlbStandings, timestamp: Date.now() }));
+    localStorage.setItem(
+      MLB_STANDINGS_KEY,
+      JSON.stringify({ data: mlbStandings, timestamp: Date.now() })
+    );
   }
 
   // Try to get cached ASG data first
@@ -81,7 +87,10 @@ export async function getAllStarBreakData() {
         `${STATS_API_URL}/v1/teams/${res.data.people[0].currentTeam.id}`
       );
       player.asgTeamName = teamRes?.data?.teams[0].league.name;
-      player.owner = getOwnerByTeamId(res.data.people[0].currentTeam.id, mlbStandings);
+      player.owner = getOwnerByTeamId(
+        res.data.people[0].currentTeam.id,
+        mlbStandings
+      );
       // Add points to owner
       if (player.owner) {
         pointsByOwner[player.owner] =
