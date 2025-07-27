@@ -28,6 +28,26 @@ const mlbStandings = ref(null);
 const allStarPlayers = ref([]);
 const ownerPoints = ref({});
 
+function getOwner(teamName) {
+  if (!mlbStandings.value) return "—";
+  const leagues = ["american", "national"];
+  const divisions = ["east", "central", "west"];
+  const normalizedTarget = teamName?.toLowerCase().trim();
+  for (const league of leagues) {
+    for (const division of divisions) {
+      const teams = mlbStandings.value?.[league]?.[division]?.standings || [];
+      for (const team of teams) {
+        const nameA = team.team?.name?.toLowerCase().trim();
+        const nameB = team.teamName?.toLowerCase().trim();
+        if (nameA === normalizedTarget || nameB === normalizedTarget) {
+          return team.team.owner || "—";
+        }
+      }
+    }
+  }
+  return "—";
+}
+
 onMounted(async () => {
   const {
     mlbStandings: standings,
@@ -37,6 +57,8 @@ onMounted(async () => {
   mlbStandings.value = standings;
   allStarPlayers.value = players;
   ownerPoints.value = points;
+
+  console.log(mlbStandings.value);
 });
 </script>
 
@@ -98,7 +120,7 @@ onMounted(async () => {
                 :key="key">
                 <td>{{ player.fullName }}</td>
                 <td>{{ player.teamName }}</td>
-                <td>Cade</td>
+                <td>{{ getOwner(player.teamName) }}</td>
                 <td>6</td>
               </tr>
             </tbody>
@@ -124,7 +146,7 @@ onMounted(async () => {
                 :key="key">
                 <td>{{ player.fullName }}</td>
                 <td>{{ player.teamName }}</td>
-                <td>Cameron</td>
+                <td>{{ getOwner(player.teamName) }}</td>
                 <td>12</td>
               </tr>
             </tbody>
@@ -155,7 +177,7 @@ onMounted(async () => {
                 :key="key">
                 <td>{{ player.fullName }}</td>
                 <td>{{ player.teamName }}</td>
-                <td>Cade</td>
+                <td>{{ getOwner(player.teamName) }}</td>
                 <td>6</td>
               </tr>
             </tbody>
@@ -180,7 +202,7 @@ onMounted(async () => {
                 :key="key">
                 <td>{{ player.fullName }}</td>
                 <td>{{ player.teamName }}</td>
-                <td>Cameron</td>
+                <td>{{ getOwner(player.teamName) }}</td>
                 <td>12</td>
               </tr>
             </tbody>

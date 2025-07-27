@@ -113,10 +113,12 @@ const tabs = [
   .thirds-container {
     flex-direction: column;
     flex-wrap: nowrap;
+    gap: 16px; /* Reduce gap on mobile */
   }
   .third-section {
     min-width: 0;
     width: 100%;
+    margin-bottom: 8px; /* Reduce space below payout history on mobile */
   }
 }
 .balances-payouts-inline {

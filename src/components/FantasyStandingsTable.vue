@@ -105,9 +105,9 @@ onMounted(async () => {
       </tbody>
     </table>
     <div style="margin-top: 8px; font-size: 0.95em; color: #555">
-      <strong>Key:</strong> (<span style="color: #888">MLB/All-Star</span>) —
-      MLB = points from division leaders, All-Star = points from All-Star
-      selections
+      <strong>Key:</strong> Total Points (<span style="color: #888"
+        >MLB/All-Star</span
+      >)
     </div>
     <a href="#/teams">See team ownerships →</a>
   </template>
