@@ -18,8 +18,8 @@ $nav-underline-offset: 2px;
   align-items: center;
   justify-content: space-between;
   padding: $spacing-0 $spacing-64;
-  background: $darkmode-background;
-  color: $darkmode-text-primary;
+  background: var(--color-nav-background);
+  color: var(--color-nav-text);
   height: $nav-height;
   z-index: 999;
   position: fixed;
@@ -117,7 +117,7 @@ $nav-underline-offset: 2px;
         left: 0;
         width: 0;
         height: $nav-underline-height;
-        background-color: $darkmode-text-primary;
+        background-color: var(--color-nav-hover);
         transition: width 0.3s ease;
       }
 
@@ -136,7 +136,8 @@ $nav-underline-offset: 2px;
 // Status Bar
 .status-bar {
   padding: $spacing-8 $spacing-0;
-  background-color: $modal;
+  background-color: var(--color-status-background);
+  color: var(--color-text-primary);
   text-align: center;
   display: none;
   position: fixed;
@@ -188,7 +189,7 @@ $nav-underline-offset: 2px;
       left: 0;
       right: 0;
       flex-direction: column;
-      background: #f2f2f2;
+      background: var(--color-surface-alt);
       box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
       z-index: 1;
       padding: 1rem 0;
@@ -202,8 +203,8 @@ $nav-underline-offset: 2px;
 
       .item a {
         padding: 0.75rem 1.5rem;
-        border-bottom: 1px solid rgb(0 0 0 / 10%);
-        color: #2e2e2e;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text-primary);
         text-align: right;
         white-space: normal;
 
@@ -212,7 +213,7 @@ $nav-underline-offset: 2px;
         }
 
         &:hover {
-          color: #585858;
+          color: var(--color-text-secondary);
         }
       }
 

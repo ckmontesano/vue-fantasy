@@ -111,7 +111,7 @@
       left: 0;
       right: 0;
       flex-direction: column;
-      background: #f2f2f2;
+      background: var(--color-surface-alt);
       box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
       z-index: 1;
       padding: 1rem 0;
@@ -125,14 +125,14 @@
 
     .options .item a {
       padding: 0.75rem 1.5rem;
-      border-bottom: 1px solid #eee;
-      color: #2e2e2e;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-primary);
       text-align: right;
       white-space: normal;
     }
 
     .options .item a:hover {
-      color: #585858;
+      color: var(--color-text-secondary);
     }
 
     .options .item:last-child a {

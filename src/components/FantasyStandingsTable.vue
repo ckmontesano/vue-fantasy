@@ -95,7 +95,7 @@ onMounted(async () => {
           </td>
           <td>
             {{ person[1] }}
-            <span style="color: #888; font-size: 0.95em">
+            <span class="value-details">
               ({{ mlbPoints[person[0]] }}/{{
                 allStarPoints[person[0]] || 0
               }})</span
@@ -104,8 +104,8 @@ onMounted(async () => {
         </tr>
       </tbody>
     </table>
-    <div style="margin-top: 8px; font-size: 0.95em; color: #555">
-      <strong>Key:</strong> Total Points (<span style="color: #888"
+    <div class="helper-text">
+      <strong>Key:</strong> Total Points (<span class="value-details"
         >MLB/All-Star</span
       >)
     </div>
@@ -123,7 +123,7 @@ tbody tr:first-child {
   font-weight: bold;
 }
 tbody tr:not(:first-child) {
-  background: #e6e6e6;
+  background: var(--color-table-row-alt);
 }
 /* crown icon */
 tbody tr td img {
@@ -133,5 +133,14 @@ tbody tr td img {
 }
 tbody tr:not(:first-child) td:first-child img {
   display: none;
+}
+.value-details {
+  color: var(--color-muted);
+  font-size: 0.95em;
+}
+.helper-text {
+  margin-top: 8px;
+  font-size: 0.95em;
+  color: var(--color-text-secondary);
 }
 </style>

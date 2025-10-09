@@ -71,9 +71,9 @@ const tabs = [
               :style="{
                 color:
                   balances[person] > 0
-                    ? '#228B22'
+                    ? 'var(--color-positive)'
                     : balances[person] < 0
-                    ? '#B22222'
+                    ? 'var(--color-negative)'
                     : 'inherit',
                 fontWeight: 'bold',
               }">

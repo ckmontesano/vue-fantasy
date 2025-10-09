@@ -16,11 +16,13 @@ table {
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
+  background: transparent;
+  color: var(--color-text-primary);
 
   th,
   td {
     text-align: left;
-    border: solid 1px black;
+    border: solid 1px var(--color-border-strong);
     padding: 8px 12px;
 
     .team-logo {
@@ -37,7 +39,7 @@ table {
 
   thead {
     tr {
-      background: #bdbdbd;
+      background: var(--color-table-header-bg);
       font-weight: $font-bold;
 
       th {

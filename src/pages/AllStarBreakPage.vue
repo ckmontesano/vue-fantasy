@@ -254,6 +254,6 @@ onMounted(async () => {
 }
 .hrd-graphic {
   max-width: 100%;
-  border: solid 2px black;
+  border: solid 2px var(--color-border-strong);
 }
 </style>

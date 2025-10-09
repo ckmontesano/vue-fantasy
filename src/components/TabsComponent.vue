@@ -40,9 +40,9 @@ function selectTab(tabId) {
 
 .tabs button {
   padding: 6px 12px;
-  border: 1px solid #000;
-  background: #e0e0e0;
-  color: #000;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-alt);
+  color: var(--color-text-primary);
   cursor: pointer;
   border-radius: 2px;
   font-size: 14px;
@@ -51,11 +51,12 @@ function selectTab(tabId) {
 }
 
 .tabs button.active {
-  background: #000;
+  background: var(--color-link);
   color: #fff;
+  border-color: var(--color-link);
 }
 
 .tabs button:hover:not(.active) {
-  background: #d0d0d0;
+  background: var(--color-surface);
 }
-</style> 
+</style>

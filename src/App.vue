@@ -3,6 +3,7 @@
   import '@/styles/app.scss';
   import NavigationBar from '@/components/NavigationBar.vue'
   import Footer from '@/components/Footer.vue';
+  import { useTheme } from '@/composables/useTheme.js';
 
   // pages
   import HomePage from '@/pages/HomePage.vue';
@@ -13,6 +14,7 @@
 
   // routing - https://vuejs.org/guide/scaling-up/routing
   import { ref, computed } from 'vue';
+  useTheme();
   const routes = {
     '/': HomePage,
     '/teams': TeamsPage,
@@ -35,4 +37,3 @@
   </div>
   <Footer />
 </template>
-
