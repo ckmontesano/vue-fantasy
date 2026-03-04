@@ -2,8 +2,9 @@
   import { ref } from 'vue'
   import '@/styles/NavigationBar.scss'
   import baseballIcon from '@/assets/baseball.png'
+  import mlbData from '@/data/mlb-2025.json'
 
-  const year = new Date().getFullYear();
+  const year = mlbData?.metadata?.season ?? 2025;
 
   const mobileNavHidden = ref(true);
 
@@ -45,9 +46,6 @@
         </li>
         <li class='item'>
           <a @click="closeMobileNav" href='#/mlb-standings'>MLB Standings</a>
-        </li>
-        <li class='item'>
-          <a @click="closeMobileNav" href='https://mlb.tv' target='_blank'>MLB.TV</a>
         </li>
       </ul>
     </div>

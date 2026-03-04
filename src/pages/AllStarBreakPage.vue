@@ -3,6 +3,7 @@
 import { ref, onMounted } from "vue";
 import TabsComponent from "@/components/TabsComponent.vue";
 import { getAllStarBreakData } from "@/scripts/allstar-break-logic.js";
+import hrdGraphic from "@/assets/hrd-2025.jpg";
 
 // Tabs setup
 const tabs = [
@@ -215,7 +216,8 @@ onMounted(async () => {
     <p>We did not select winners this year, so no points will be awarded.</p>
     <img
       class="hrd-graphic"
-      src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9/t_w1536/mlb/xaecfgfddqtw9iiymd4h.jpg" />
+      :src="hrdGraphic"
+      alt="Home Run Derby" />
   </div>
 </template>
 

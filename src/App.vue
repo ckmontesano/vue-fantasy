@@ -12,7 +12,7 @@
   import MLBStandings from '@/pages/MLBStandings.vue';
   import NotFound from '@/pages/NotFound.vue';
 
-  // routing - https://vuejs.org/guide/scaling-up/routing
+  // routing
   import { ref, computed } from 'vue';
   useTheme();
   const routes = {

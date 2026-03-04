@@ -1,8 +1,15 @@
-const LOGO_API_PREFIX =
-  "https://www.mlbstatic.com/team-logos/team-cap-on-light/";
+import baseballIcon from "@/assets/baseball.png";
+
+const logos = import.meta.glob("../assets/team-logos/*.svg", {
+  eager: true,
+  import: "default",
+});
 
 function getTeamLogoURL(teamId) {
-  return `${LOGO_API_PREFIX}${teamId}.svg`;
+  const match = Object.keys(logos).find((key) =>
+    key.endsWith(`/${teamId}.svg`)
+  );
+  return (match && logos[match]) || baseballIcon;
 }
 
 export default getTeamLogoURL;
