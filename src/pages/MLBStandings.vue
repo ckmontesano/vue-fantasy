@@ -1,22 +1,19 @@
 <script setup>
   // dependencies
-  import { ref, onMounted } from "vue"
-  import getMlbStandings from "@/scripts/mlb-standings.js";
+  import { ref } from "vue"
+  import { useMlbStandings } from "@/composables/useMlbStandings.js";
 
   // components
   import MLBStandingsTable from "@/components/MlbStandingsTable.vue";
   import TabsComponent from '@/components/TabsComponent.vue';
   
-  const mlbStandings = ref(null);
+  const { mlbStandings } = useMlbStandings();
   const activeTab = ref('american');
   const tabs = [
     { id: 'american', label: 'American League' },
     { id: 'national', label: 'National League' }
   ];
 
-  onMounted(async() => {
-    mlbStandings.value = await getMlbStandings();
-  })
 </script>
 
 <template>

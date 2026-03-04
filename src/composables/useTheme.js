@@ -9,7 +9,7 @@ function applyTheme() {
   if (typeof document === "undefined") return;
 
   const root = document.documentElement;
-  root.removeAttribute("data-theme");
+  root.setAttribute("data-theme", theme.value);
   root.style.colorScheme = theme.value;
 }
 

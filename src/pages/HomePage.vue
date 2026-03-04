@@ -4,9 +4,7 @@ import MlbDivisionLeadersTable from "@/components/MlbDivisionLeadersTable.vue";
 import FantasyStandingsTable from "@/components/FantasyStandingsTable.vue";
 import PayoutHistoryTable from "@/components/PayoutHistoryTable.vue";
 import TabsComponent from "@/components/TabsComponent.vue";
-import { ref } from "vue";
-
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { usePayoutHistory } from "@/composables/usePayoutHistory.js";
 
 const { payoutHistory } = usePayoutHistory();

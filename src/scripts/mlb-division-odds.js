@@ -1,8 +1,5 @@
 import originalDivisionOdds from "@/scripts/utils/original-division-odds.json";
 
-// todo: this
-function getCurrentOdds() {}
-
 function attachDivisionOdds(mlbStandings) {
   if (!mlbStandings) return;
 

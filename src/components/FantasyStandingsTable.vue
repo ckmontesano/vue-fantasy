@@ -1,10 +1,10 @@
 <script setup>
 // dependencies
-import { ref, onMounted } from "vue";
-import getMlbStandings from "@/scripts/mlb-standings.js";
+import { ref, watch, onMounted } from "vue";
+import { useMlbStandings } from "@/composables/useMlbStandings.js";
 import { getAllStarBreakData } from "@/scripts/allstar-break-logic.js";
 
-const mlbStandings = ref(null);
+const { mlbStandings } = useMlbStandings();
 const points = ref({
   Cameron: 0,
   Caden: 0,
@@ -24,38 +24,34 @@ const allStarPoints = ref({
   Dad: 0,
 });
 
-onMounted(async () => {
-  // Get MLB standings and All-Star points
-  const [mlb, allStar] = await Promise.all([
-    getMlbStandings(),
-    getAllStarBreakData(),
-  ]);
-  mlbStandings.value = mlb;
+function calculatePoints() {
+  Object.keys(points.value).forEach((owner) => {
+    points.value[owner] =
+      (mlbPoints.value[owner] || 0) + (allStarPoints.value[owner] || 0);
+  });
+}
 
-  // Calculate points from MLB standings
-  Object.values(mlbStandings.value).forEach((league) => {
+watch(mlbStandings, (standings) => {
+  if (!standings) return;
+  mlbPoints.value = {
+    Cameron: 0,
+    Caden: 0,
+    Jack: 0,
+    Dad: 0,
+  };
+  Object.values(standings).forEach((league) => {
     Object.values(league).forEach((division) => {
       const team = division.leader.team;
-      switch (team.owner) {
-        case "Cameron":
-          mlbPoints.value.Cameron += team.odds;
-          break;
-        case "Caden":
-          mlbPoints.value.Caden += team.odds;
-          break;
-        case "Jack":
-          mlbPoints.value.Jack += team.odds;
-          break;
-        case "Dad":
-          mlbPoints.value.Dad += team.odds;
-          break;
-        default:
-          break;
+      if (mlbPoints.value[team.owner] !== undefined) {
+        mlbPoints.value[team.owner] += team.odds;
       }
     });
   });
+  calculatePoints();
+}, { immediate: true });
 
-  // Add All-Star points
+onMounted(async () => {
+  const allStar = await getAllStarBreakData();
   if (allStar && allStar.ownerPoints) {
     Object.entries(allStar.ownerPoints).forEach(([owner, asgPoints]) => {
       if (allStarPoints.value[owner] !== undefined) {
@@ -63,14 +59,7 @@ onMounted(async () => {
       }
     });
   }
-
-  // Combine for total points
-  Object.keys(points.value).forEach((owner) => {
-    points.value[owner] =
-      mlbPoints.value[owner] + (allStarPoints.value[owner] || 0);
-  });
-
-  console.log(points, mlbPoints, allStarPoints);
+  calculatePoints();
 });
 </script>
 

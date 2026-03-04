@@ -1,13 +1,9 @@
 <script setup>
   // dependencies
-  import { ref, onMounted } from "vue"
-  import getMlbStandings from "@/scripts/mlb-standings.js"
+  import { useMlbStandings } from "@/composables/useMlbStandings.js";
   import getTeamLogoURL from '@/scripts/mlb-team-logos.js'
-  
-  const mlbStandings = ref(null);
-  onMounted(async() => {
-    mlbStandings.value = await getMlbStandings();
-  })
+
+  const { mlbStandings } = useMlbStandings();
 </script>
 
 <template>

@@ -4,6 +4,7 @@ import js from "@eslint/js";
 import pluginVue from "eslint-plugin-vue";
 
 export default defineConfig([
+  { ignores: ["dist/**"] },
   { files: ["**/*.{js,mjs,cjs,vue}"] },
   {
     files: ["**/*.{js,mjs,cjs,vue}"],

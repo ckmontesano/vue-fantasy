@@ -58,7 +58,6 @@ onMounted(async () => {
   allStarPlayers.value = players;
   ownerPoints.value = points;
 
-  console.log(mlbStandings.value);
 });
 </script>
 
@@ -66,7 +65,7 @@ onMounted(async () => {
   <h1>All-Star Break</h1>
 
   <h2>Points Overview</h2>
-  <table style="margin-bottom: 2rem">
+  <table class="points-table">
     <thead>
       <tr>
         <td>Owner</td>
@@ -255,5 +254,8 @@ onMounted(async () => {
 .hrd-graphic {
   max-width: 100%;
   border: solid 2px var(--color-border-strong);
+}
+.points-table {
+  margin-bottom: 2rem;
 }
 </style>
