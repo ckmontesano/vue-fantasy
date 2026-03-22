@@ -1,9 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import baseballIcon from "@/assets/baseball.png";
-import mlbData from "@/data/mlb-2025.json";
-
-const year = mlbData?.metadata?.season ?? 2025;
 
 const mobileNavOpen = ref(false);
 
@@ -27,10 +24,10 @@ const navLinks = [
   <header class="fixed inset-x-0 top-0 z-50 border-b border-zinc-300/80 bg-white/95 text-zinc-900 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-950/95 dark:text-zinc-100">
     <div class="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-2 sm:px-6 md:px-8">
       <a href="#/" class="group flex items-center gap-3 text-inherit" @click="closeMobileNav">
-        <img class="h-9 w-9 rounded-full ring-1 ring-zinc-300 dark:ring-zinc-600" :src="baseballIcon" draggable="false" alt="Montesano Fantasy Baseball logo" />
+        <img class="h-9 w-9" :src="baseballIcon" draggable="false" alt="Montesano Fantasy Baseball logo" />
         <div class="flex flex-col leading-tight">
-          <span class="text-lg font-semibold tracking-tight">Montesano</span>
-          <span class="text-xs text-zinc-600 dark:text-zinc-300">Fantasy Baseball {{ year }}</span>
+          <span class="text-xl font-semibold tracking-tight">Montesano Fantasy Baseball</span>
+          <span class="-mt-1.5 text-base text-zinc-600 dark:text-zinc-300">2026 Season</span>
         </div>
       </a>
 

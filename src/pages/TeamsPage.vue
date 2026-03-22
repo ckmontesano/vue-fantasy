@@ -33,6 +33,7 @@
     { id: 'Jack', label: 'Jack' },
     { id: 'Dad', label: 'Dad' }
   ];
+  const people = tabs.map((tab) => tab.id);
 
   watch(mlbStandings, (standings) => {
     if (!standings) return;
@@ -56,13 +57,26 @@
 
 <template>
   <h1 class="my-2 text-4xl font-semibold tracking-tight">Teams</h1>
-  <TabsComponent
-    v-model="activeTab"
-    :tabs="tabs"
-    @update:modelValue="updateActiveTab"
-  />
 
-  <div v-for="(personTeams, person) in teams" :key="person" v-show="activeTab === person">
-    <TeamOwnershipTable :teams="personTeams" />
+  <div class="hidden gap-6 md:grid md:grid-cols-2">
+    <section
+      v-for="person in people"
+      :key="person"
+      class="min-w-0">
+      <h2 class="mb-2 text-2xl font-semibold">{{ person }}</h2>
+      <TeamOwnershipTable :teams="teams[person]" />
+    </section>
+  </div>
+
+  <div class="md:hidden">
+    <TabsComponent
+      v-model="activeTab"
+      :tabs="tabs"
+      @update:modelValue="updateActiveTab"
+    />
+
+    <div v-for="(personTeams, person) in teams" :key="person" v-show="activeTab === person">
+      <TeamOwnershipTable :teams="personTeams" />
+    </div>
   </div>
 </template>
