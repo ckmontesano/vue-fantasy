@@ -19,44 +19,19 @@ function selectTab(tabId) {
 </script>
 
 <template>
-  <div class="tabs">
-    <button 
-      v-for="tab in tabs" 
+  <div class="my-4 flex flex-wrap gap-2">
+    <button
+      v-for="tab in tabs"
       :key="tab.id"
-      :class="{ active: modelValue === tab.id }" 
-      @click="selectTab(tab.id)"
-    >
+      type="button"
+      class="rounded-md border px-3 py-1.5 text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:outline-none"
+      :class="
+        modelValue === tab.id
+          ? 'border-blue-600 bg-blue-600 text-white dark:border-blue-400 dark:bg-blue-400 dark:text-zinc-950'
+          : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'
+      "
+      @click="selectTab(tab.id)">
       {{ tab.label }}
     </button>
   </div>
 </template>
-
-<style scoped>
-.tabs {
-  margin: 16px 0;
-  display: flex;
-  gap: 8px;
-}
-
-.tabs button {
-  padding: 6px 12px;
-  border: 1px solid var(--color-border-strong);
-  background: var(--color-surface-alt);
-  color: var(--color-text-primary);
-  cursor: pointer;
-  border-radius: 2px;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.tabs button.active {
-  background: var(--color-link);
-  color: #fff;
-  border-color: var(--color-link);
-}
-
-.tabs button:hover:not(.active) {
-  background: var(--color-surface);
-}
-</style>

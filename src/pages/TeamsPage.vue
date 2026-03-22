@@ -55,7 +55,7 @@
 </script>
 
 <template>
-  <h1>Teams</h1>
+  <h1 class="my-2 text-4xl font-semibold tracking-tight">Teams</h1>
   <TabsComponent
     v-model="activeTab"
     :tabs="tabs"
@@ -66,7 +66,3 @@
     <TeamOwnershipTable :teams="personTeams" />
   </div>
 </template>
-
-<style scoped>
-/* No styles needed as they're now in TabsComponent */
-</style>

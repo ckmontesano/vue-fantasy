@@ -11,6 +11,10 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
   },
   {
+    files: ["**/*.cjs"],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ["**/*.{js,mjs,cjs,vue}"],
     plugins: { js },
     extends: ["js/recommended"],

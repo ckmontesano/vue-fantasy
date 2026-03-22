@@ -39,42 +39,42 @@ const tabs = [
 </script>
 
 <template>
-  <h1>Home</h1>
+  <h1 class="my-2 text-4xl font-semibold tracking-tight">Home</h1>
   <TabsComponent v-model="activeTab" :tabs="tabs" />
 
-  <div v-if="activeTab === 'standings'" class="sections-container">
-    <div class="section">
-      <h2>Fantasy Standings</h2>
+  <div v-if="activeTab === 'standings'" class="grid gap-5 md:grid-cols-3">
+    <div class="min-w-0 md:col-span-1">
+      <h2 class="mb-2 text-2xl font-semibold">Fantasy Standings</h2>
       <FantasyStandingsTable />
     </div>
-    <div class="section mlb-section">
-      <h2>MLB Division Leaders</h2>
+    <div class="min-w-0 md:col-span-3">
+      <h2 class="mb-2 text-2xl font-semibold">MLB Division Leaders</h2>
       <MlbDivisionLeadersTable />
     </div>
   </div>
-  <div v-if="activeTab === 'payouts'" class="thirds-container">
-    <div class="section third-section">
-      <h2>Balances</h2>
-      <table class="balances-table">
+  <div v-if="activeTab === 'payouts'" class="flex flex-col items-start gap-4 pb-2 md:flex-row md:gap-10">
+    <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
+      <h2 class="mb-2 text-2xl font-semibold">Balances</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse text-sm">
         <thead>
-          <tr>
-            <th>Person</th>
-            <th>Balance</th>
+          <tr class="bg-zinc-300 dark:bg-zinc-700">
+            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Person</th>
+            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Balance</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="person in people" :key="person">
-            <td>{{ person }}</td>
+          <tr v-for="person in people" :key="person" class="odd:bg-zinc-100 odd:dark:bg-zinc-800/70">
+            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">{{ person }}</td>
             <td
-              :style="{
-                color:
-                  balances[person] > 0
-                    ? 'var(--color-positive)'
-                    : balances[person] < 0
-                    ? 'var(--color-negative)'
-                    : 'inherit',
-                fontWeight: 'bold',
-              }">
+              class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 font-bold"
+              :class="
+                balances[person] > 0
+                  ? 'text-green-600 dark:text-green-400'
+                  : balances[person] < 0
+                    ? 'text-red-600 dark:text-red-400'
+                    : ''
+              ">
               {{
                 balances[person] > 0 ? "+$" : balances[person] < 0 ? "-$" : "$"
               }}{{ Math.abs(balances[person]) }}
@@ -82,94 +82,11 @@ const tabs = [
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
-    <div class="section third-section">
-      <h2>Payout History</h2>
+    <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
+      <h2 class="mb-2 text-2xl font-semibold">Payout History</h2>
       <PayoutHistoryTable />
     </div>
   </div>
 </template>
-
-<style scoped>
-.thirds-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-.third-section {
-  flex: 0 1 auto;
-  min-width: 350px;
-  box-sizing: border-box;
-  margin-bottom: 0;
-}
-@media (max-width: 900px) {
-  .thirds-container {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 16px; /* Reduce gap on mobile */
-  }
-  .third-section {
-    min-width: 0;
-    width: 100%;
-    margin-bottom: 8px; /* Reduce space below payout history on mobile */
-  }
-}
-.balances-payouts-inline {
-  width: 100%;
-  white-space: normal;
-}
-.balances-section,
-.payouts-section {
-  display: inline-block;
-  vertical-align: top;
-  width: auto;
-  min-width: 300px;
-  margin-right: 32px;
-}
-.payouts-section {
-  margin-right: 0;
-}
-@media (max-width: 900px) {
-  .balances-section,
-  .payouts-section {
-    display: block;
-    width: 100%;
-    margin-right: 0;
-  }
-}
-.balances-payouts-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .balances-payouts-container {
-    grid-template-columns: 1fr;
-  }
-}
-.sections-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 20px;
-}
-
-.section {
-  min-width: 0; /* Prevents overflow issues */
-}
-
-.mlb-section {
-  grid-column: 1 / -1; /* Spans all columns */
-}
-
-@media (max-width: 768px) {
-  .sections-container {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

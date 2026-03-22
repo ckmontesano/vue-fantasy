@@ -7,41 +7,36 @@
 </script>
 
 <template>
-  <table v-if="mlbStandings">
+  <div v-if="mlbStandings" class="overflow-x-auto">
+    <table class="min-w-full border-collapse text-sm">
     <thead>
-      <tr>
-        <th>Division</th>
-        <th>Leader</th>
-        <th>Owner</th>
-        <th>Division Win Odds</th>
+      <tr class="bg-zinc-300 dark:bg-zinc-700">
+        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Division</th>
+        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Leader</th>
+        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Owner</th>
+        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Division Win Odds</th>
       </tr>
     </thead>
     <tbody>
       <template v-for="(league, leagueKey) in mlbStandings" :key="leagueKey">
         <template v-for="(division, divisionKey) in league" :key="divisionKey">
           <tr>
-            <td class="no-wrap">{{ division.name.replace('American League', 'AL').replace('National League', 'NL') }}</td>
-            <td class="no-wrap" v-if="division.leader">
-              <img class="team-logo" :src="getTeamLogoURL(division.leader.team.id)" />
+            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">{{ division.name.replace('American League', 'AL').replace('National League', 'NL') }}</td>
+            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2" v-if="division.leader">
+              <img class="mr-1 inline h-5 w-5 align-middle" :src="getTeamLogoURL(division.leader.team.id)" />
               {{ division.leader.team.name }}
             </td>
-            <td v-else>—</td>
-            <td v-if="division.leader">{{ division.leader.team.owner || 'Undrafted' }}</td>
-            <td v-else>—</td>
-            <td v-if="division.leader">+{{ division.leader.team.odds ?? 'N/A' }}</td>
-            <td v-else>—</td>
+            <td class="border border-zinc-500/50 px-3 py-2" v-else>—</td>
+            <td class="border border-zinc-500/50 px-3 py-2" v-if="division.leader">{{ division.leader.team.owner || 'Undrafted' }}</td>
+            <td class="border border-zinc-500/50 px-3 py-2" v-else>—</td>
+            <td class="border border-zinc-500/50 px-3 py-2" v-if="division.leader">+{{ division.leader.team.odds ?? 'N/A' }}</td>
+            <td class="border border-zinc-500/50 px-3 py-2" v-else>—</td>
           </tr>
         </template>
       </template>
     </tbody>
-  </table>
+    </table>
+  </div>
   <p v-if="!mlbStandings">Loading…</p>
-  <a href='#/mlb-standings'>See full standings →</a>
+  <a class="mt-2 block" href="#/mlb-standings">See full standings →</a>
 </template>
-
-<style scoped>
-  a {
-    display: block;
-    margin-top: 10px;
-  }
-</style>

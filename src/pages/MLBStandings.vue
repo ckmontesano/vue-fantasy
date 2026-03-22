@@ -17,7 +17,7 @@
 </script>
 
 <template>
-  <h1>MLB Standings</h1>
+  <h1 class="my-2 text-4xl font-semibold tracking-tight">MLB Standings</h1>
   <TabsComponent
     v-model="activeTab"
     :tabs="tabs"
@@ -35,7 +35,7 @@
     <MLBStandingsTable :division="mlbStandings.national.west" />
   </div>
 
-  <ul class='legend'>
+  <ul class="mt-12 list-none p-0 text-left">
     <li><b>OOTWD =</b> Original Odds to Win Division</li>
     <li><b>W =</b> Wins</li>
     <li><b>L =</b> Losses</li>
@@ -44,12 +44,3 @@
     <li><b>L10 =</b> Record for Last 10 Games</li>
   </ul>
 </template>
-
-<style scoped>
-  .legend {
-    margin: 48px 0 0;
-    padding: 0;
-    list-style: none;
-    text-align: left;
-  }
-</style>

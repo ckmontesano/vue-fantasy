@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { fileURLToPath, URL } from "node:url";
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,16 +13,8 @@ export default defineConfig({
     },
   },
   css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use "@/styles/colors" as *;
-          @use "@/styles/spacing" as *;
-          @use "@/styles/breakpoints" as *;
-          @use "@/styles/fonts" as *;
-          @use "@/styles/global" as *;
-        `,
-      },
+    postcss: {
+      plugins: [tailwindcss(), autoprefixer()],
     },
   },
   base: "/",
