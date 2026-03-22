@@ -1,0 +1,36 @@
+<script setup>
+import NavigationBar from "@/components/NavigationBar.vue";
+import Footer from "@/components/Footer.vue";
+
+import HomePage from "@/pages/HomePage.vue";
+import TeamsPage from "@/pages/TeamsPage.vue";
+import AllStarBreakPage from "@/pages/AllStarBreakPage.vue";
+import MLBStandings from "@/pages/MLBStandings.vue";
+import NotFound from "@/pages/NotFound.vue";
+
+import { ref, computed } from "vue";
+
+const routes = {
+  "/": HomePage,
+  "/teams": TeamsPage,
+  "/all-star-break": AllStarBreakPage,
+  "/mlb-standings": MLBStandings,
+};
+
+const currentPath = ref(window.location.hash);
+window.addEventListener("hashchange", () => {
+  currentPath.value = window.location.hash;
+});
+
+const currentView = computed(() => {
+  return routes[currentPath.value.slice(1) || "/"] || NotFound;
+});
+</script>
+
+<template>
+  <NavigationBar />
+  <main class="mx-auto max-w-7xl bg-zinc-100 px-2 pt-24 pb-8 text-sm text-zinc-900 sm:px-6 md:px-8 md:pt-28 md:pb-12 dark:bg-zinc-800 dark:text-zinc-100">
+    <component :is="currentView" />
+  </main>
+  <Footer />
+</template>
