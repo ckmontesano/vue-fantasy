@@ -4,6 +4,13 @@
 
 Static Vue 3 site for the Montesano Fantasy Baseball league. This repository is archived for the 2025 season and is fully offline (no runtime API calls).
 
+## Agent Start Here
+
+- Agent operating notes: `AGENTS.md`
+- League rules context: `docs/league-context.md`
+- Efficient API workflows and examples: `docs/agent-workflows.md`
+- MLB StatsAPI schema snapshot: `docs/api/swagger-docs.json`
+
 ## Offline Archive
 
 - All MLB data is baked into `src/data/mlb-2025.json`.
