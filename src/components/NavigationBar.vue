@@ -56,7 +56,7 @@ const navLinks = [
     </div>
 
     <div class="marquee hidden border-t border-zinc-300 bg-zinc-200/80 py-1.5 text-center text-xs text-zinc-700 md:block dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300">
-      <p>Last MLB data update: 6/12/2025 at 8:15pm</p>
+      <p>Last MLB data update: 10/31/2025</p>
     </div>
   </header>
 </template>

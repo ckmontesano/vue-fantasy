@@ -28,9 +28,11 @@ const currentView = computed(() => {
 </script>
 
 <template>
-  <NavigationBar />
-  <main class="mx-auto max-w-7xl bg-zinc-100 px-2 pt-24 pb-8 text-sm text-zinc-900 sm:px-6 md:px-8 md:pt-28 md:pb-12 dark:bg-zinc-800 dark:text-zinc-100">
-    <component :is="currentView" />
-  </main>
-  <Footer />
+  <div class="min-h-screen bg-zinc-200 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+    <NavigationBar />
+    <main class="mx-auto max-w-7xl bg-zinc-100 px-2 pt-24 pb-8 text-sm sm:px-6 md:px-8 md:pt-28 md:pb-12 dark:bg-zinc-800">
+      <component :is="currentView" />
+    </main>
+    <Footer />
+  </div>
 </template>
