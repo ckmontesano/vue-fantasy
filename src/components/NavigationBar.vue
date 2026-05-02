@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from "vue";
+import { useMlbStandings } from "@/composables/useMlbStandings.js";
 import baseballIcon from "@/assets/baseball.png";
 
 const mobileNavOpen = ref(false);
+const isForceRefreshing = ref(false);
+const { isLoading, lastFetchedAt, refreshMlbStandings } = useMlbStandings();
 
 const toggleMobileNav = () => {
   mobileNavOpen.value = !mobileNavOpen.value;
@@ -17,7 +20,44 @@ const navLinks = [
   { href: "#/teams", label: "Teams" },
   { href: "#/all-star-break", label: "All-Star Break" },
   { href: "#/mlb-standings", label: "MLB Standings" },
+  { href: "#/rules", label: "Rules" },
 ];
+
+function formatLastUpdated(timestamp) {
+  if (!timestamp) {
+    return "Waiting for first MLB sync";
+  }
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "numeric",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(timestamp);
+}
+
+async function handleForceRefresh() {
+  const startedAt = Date.now();
+
+  isForceRefreshing.value = true;
+
+  try {
+    await refreshMlbStandings();
+  } catch {
+    // Keep the navbar quiet if refresh fails; error state lives in the composable.
+  } finally {
+    const remainingDelay = 1000 - (Date.now() - startedAt);
+
+    if (remainingDelay > 0) {
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, remainingDelay);
+      });
+    }
+
+    isForceRefreshing.value = false;
+  }
+}
 </script>
 
 <template>
@@ -56,7 +96,17 @@ const navLinks = [
     </div>
 
     <div class="marquee hidden border-t border-zinc-300 bg-zinc-200/80 py-1.5 text-center text-xs text-zinc-700 md:block dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300">
-      <p>Last MLB data update: 10/31/2025</p>
+      <p>
+        Last MLB data update: {{ formatLastUpdated(lastFetchedAt) }}.
+        <span class="ml-1">Data is stored for one hour.</span>
+        <button
+          type="button"
+          class="ml-2 underline underline-offset-2 disabled:no-underline"
+          :disabled="isLoading || isForceRefreshing"
+          @click="handleForceRefresh">
+          {{ isLoading || isForceRefreshing ? "Refreshing..." : "Force refresh" }}
+        </button>
+      </p>
     </div>
   </header>
 </template>

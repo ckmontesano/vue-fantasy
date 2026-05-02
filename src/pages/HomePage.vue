@@ -1,45 +1,74 @@
 <script setup>
 // components
+import { STAKES } from "@/data/season-2026.js";
+import DataTable from "@/components/DataTable.vue";
 import MlbDivisionLeadersTable from "@/components/MlbDivisionLeadersTable.vue";
 import FantasyStandingsTable from "@/components/FantasyStandingsTable.vue";
 import PayoutHistoryTable from "@/components/PayoutHistoryTable.vue";
 import TabsComponent from "@/components/TabsComponent.vue";
-import { ref, computed } from "vue";
-import { usePayoutHistory } from "@/composables/usePayoutHistory.js";
-
-const { payoutHistory } = usePayoutHistory();
-
-const people = computed(() => {
-  const set = new Set();
-  payoutHistory.value.forEach((row) => {
-    set.add(row.winner);
-    if (row.losers) row.losers.forEach((loser) => set.add(loser));
-  });
-  return Array.from(set);
-});
-
-const balances = computed(() => {
-  const bal = Object.fromEntries(people.value.map((p) => [p, 0]));
-  payoutHistory.value.forEach((row) => {
-    if (row.losers) {
-      row.losers.forEach((loser) => {
-        bal[loser] -= 20;
-        bal[row.winner] += 20;
-      });
-    }
-  });
-  return bal;
-});
+import { ref } from "vue";
 
 const activeTab = ref("standings");
+const isDisputeModalOpen = ref(false);
 const tabs = [
   { id: "standings", label: "Standings" },
-  { id: "payouts", label: "Balances and Payouts" },
+  { id: "payouts", label: "Pools and Payouts" },
 ];
+
+const poolsColumns = [
+  { key: "pool", label: "Pool", sortable: true },
+  { key: "stake", label: "Stake", sortable: true },
+  { key: "payout", label: "Payout", sortable: true },
+];
+
+const poolsRows = [
+  {
+    pool: "Regular Season",
+    stake: `$${STAKES.monthly.wager}/person each month`,
+    payout: `$${STAKES.monthly.payout} monthly winner`,
+  },
+  {
+    pool: "All-Star Break",
+    stake: `$${STAKES.allStar.wager}/person`,
+    payout: `$${STAKES.allStar.payout} winner`,
+  },
+  {
+    pool: "Playoffs",
+    stake: `$${STAKES.playoffs.wager}/person`,
+    payout: "Separate playoff pool",
+  },
+  {
+    pool: "Season Total",
+    stake: `$${STAKES.totalCommitment}/person`,
+    payout: "Collected up front on draft day",
+  },
+];
+
+function getPoolsRowClass(row, rowIndex) {
+  const baseClass = "odd:bg-zinc-100 odd:dark:bg-zinc-800/70";
+
+  return rowIndex === poolsRows.length - 1 ? `${baseClass} font-semibold` : baseClass;
+}
+
+function openDisputeModal() {
+  isDisputeModalOpen.value = true;
+}
+
+function closeDisputeModal() {
+  isDisputeModalOpen.value = false;
+}
 </script>
 
 <template>
-  <h1 class="my-2 text-4xl font-semibold tracking-tight">Home</h1>
+  <div class="mb-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+    <h1 class="text-4xl font-semibold tracking-tight">Home</h1>
+    <button
+      type="button"
+      class="inline-flex items-center self-start rounded-md border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-700 dark:hover:text-zinc-100"
+      @click="openDisputeModal">
+      Dispute Standings
+    </button>
+  </div>
   <TabsComponent v-model="activeTab" :tabs="tabs" />
 
   <div v-if="activeTab === 'standings'" class="grid gap-5 md:grid-cols-3">
@@ -54,39 +83,39 @@ const tabs = [
   </div>
   <div v-if="activeTab === 'payouts'" class="flex flex-col items-start gap-4 pb-2 md:flex-row md:gap-10">
     <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
-      <h2 class="mb-2 text-2xl font-semibold">Balances</h2>
-      <div class="overflow-x-auto">
-        <table class="min-w-full border-collapse text-sm">
-        <thead>
-          <tr class="bg-zinc-300 dark:bg-zinc-700">
-            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Person</th>
-            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="person in people" :key="person" class="odd:bg-zinc-100 odd:dark:bg-zinc-800/70">
-            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">{{ person }}</td>
-            <td
-              class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 font-bold"
-              :class="
-                balances[person] > 0
-                  ? 'text-green-600 dark:text-green-400'
-                  : balances[person] < 0
-                    ? 'text-red-600 dark:text-red-400'
-                    : ''
-              ">
-              {{
-                balances[person] > 0 ? "+$" : balances[person] < 0 ? "-$" : "$"
-              }}{{ Math.abs(balances[person]) }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
+      <h2 class="mb-2 text-2xl font-semibold">Pools / Stakes</h2>
+      <DataTable
+        :columns="poolsColumns"
+        :rows="poolsRows"
+        row-key="pool"
+        :row-class="getPoolsRowClass" />
+      <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
+        March does not count toward monthly regular-season winners.
+      </p>
     </div>
     <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
       <h2 class="mb-2 text-2xl font-semibold">Payout History</h2>
       <PayoutHistoryTable />
+    </div>
+  </div>
+
+  <div
+    v-if="isDisputeModalOpen"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 px-4"
+    aria-modal="true"
+    role="dialog"
+    @click.self="closeDisputeModal">
+    <div class="w-full max-w-md rounded-lg border border-zinc-300 bg-zinc-100 p-6 shadow-xl dark:border-zinc-700 dark:bg-zinc-800">
+      <div class="flex items-start justify-between gap-4">
+        <h2 class="text-2xl font-semibold tracking-tight">Standing Dispute</h2>
+        <button
+          type="button"
+          class="rounded-md border border-zinc-300 px-2 py-1 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-700 dark:hover:text-zinc-100"
+          @click="closeDisputeModal">
+          Close
+        </button>
+      </div>
+      <p class="mt-4 text-base">Go fuck yourself I'm the commissioner 🖕</p>
     </div>
   </div>
 </template>

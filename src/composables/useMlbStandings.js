@@ -1,24 +1,53 @@
 import { ref, onMounted } from "vue";
 import getMlbStandings from "@/scripts/mlb-standings.js";
 
-export function useMlbStandings() {
-  const mlbStandings = ref(null);
-  const isLoading = ref(true);
-  const error = ref(null);
+const mlbStandings = ref(null);
+const lastFetchedAt = ref(null);
+const isLoading = ref(false);
+const error = ref(null);
 
-  onMounted(async () => {
-    try {
-      mlbStandings.value = await getMlbStandings();
-    } catch (err) {
+let hasLoaded = false;
+let pendingRequest = null;
+
+async function loadMlbStandings(options = {}) {
+  if (pendingRequest) {
+    return pendingRequest;
+  }
+
+  isLoading.value = true;
+  error.value = null;
+
+  pendingRequest = getMlbStandings(options)
+    .then((payload) => {
+      mlbStandings.value = payload.standings;
+      lastFetchedAt.value = payload.fetchedAt;
+      hasLoaded = true;
+      return payload;
+    })
+    .catch((err) => {
       error.value = err;
-    } finally {
+      throw err;
+    })
+    .finally(() => {
       isLoading.value = false;
+      pendingRequest = null;
+    });
+
+  return pendingRequest;
+}
+
+export function useMlbStandings() {
+  onMounted(() => {
+    if (!hasLoaded) {
+      loadMlbStandings().catch(() => {});
     }
   });
 
   return {
     mlbStandings,
+    lastFetchedAt,
     isLoading,
     error,
+    refreshMlbStandings: () => loadMlbStandings({ forceRefresh: true }),
   };
 }

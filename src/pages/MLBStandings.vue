@@ -36,7 +36,8 @@
   </div>
 
   <ul class="mt-12 list-none p-0 text-left">
-    <li><b>OOTWD =</b> Original Odds to Win Division</li>
+    <li><b>Odds =</b> Draft-day division odds</li>
+    <li><b>Pts =</b> 2026 prorated fantasy points</li>
     <li><b>W =</b> Wins</li>
     <li><b>L =</b> Losses</li>
     <li><b>PCT =</b> Win Percentage</li>

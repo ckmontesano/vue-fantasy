@@ -1,7 +1,7 @@
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { computed, ref, watch } from "vue";
+import DataTable from "@/components/DataTable.vue";
 import { useMlbStandings } from "@/composables/useMlbStandings.js";
-import { getAllStarBreakData } from "@/scripts/allstar-break-logic.js";
 
 const { mlbStandings } = useMlbStandings();
 const points = ref({
@@ -16,17 +16,42 @@ const mlbPoints = ref({
   Jack: 0,
   Dad: 0,
 });
-const allStarPoints = ref({
-  Cameron: 0,
-  Caden: 0,
-  Jack: 0,
-  Dad: 0,
-});
+
+const columns = [
+  {
+    key: "owner",
+    label: "Team",
+    sortable: true,
+  },
+  {
+    key: "totalPoints",
+    label: "Points",
+    sortable: true,
+    sortDirection: "desc",
+  },
+];
+
+const rows = computed(() =>
+  Object.entries(points.value)
+    .map(([owner, totalPoints]) => ({
+      owner,
+      totalPoints,
+      mlbPoints: mlbPoints.value[owner] || 0,
+    }))
+    .sort((left, right) => right.totalPoints - left.totalPoints),
+);
+
+const topOwner = computed(() => rows.value[0]?.owner || null);
+
+function getRowClass(row) {
+  const baseClass = "odd:bg-zinc-100 odd:dark:bg-zinc-800/70";
+
+  return row.owner === topOwner.value ? `${baseClass} font-bold` : baseClass;
+}
 
 function calculatePoints() {
   Object.keys(points.value).forEach((owner) => {
-    points.value[owner] =
-      (mlbPoints.value[owner] || 0) + (allStarPoints.value[owner] || 0);
+    points.value[owner] = mlbPoints.value[owner] || 0;
   });
 }
 
@@ -42,9 +67,13 @@ watch(
     };
     Object.values(standings).forEach((league) => {
       Object.values(league).forEach((division) => {
+        if (!division.leader?.team) {
+          return;
+        }
+
         const team = division.leader.team;
         if (mlbPoints.value[team.owner] !== undefined) {
-          mlbPoints.value[team.owner] += team.odds;
+          mlbPoints.value[team.owner] += team.fantasyPoints || 0;
         }
       });
     });
@@ -52,55 +81,36 @@ watch(
   },
   { immediate: true },
 );
-
-onMounted(async () => {
-  const allStar = await getAllStarBreakData();
-  if (allStar && allStar.ownerPoints) {
-    Object.entries(allStar.ownerPoints).forEach(([owner, asgPoints]) => {
-      if (allStarPoints.value[owner] !== undefined) {
-        allStarPoints.value[owner] = asgPoints;
-      }
-    });
-  }
-  calculatePoints();
-});
 </script>
 
 <template>
   <template v-if="mlbStandings">
-    <div class="overflow-x-auto">
-      <table class="min-w-full border-collapse text-sm">
-        <thead>
-          <tr class="bg-zinc-300 dark:bg-zinc-700">
-            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Team</th>
-            <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(person, personKey) in Object.entries(points).sort((a, b) => b[1] - a[1])"
-            :key="personKey"
-            :class="personKey === 0 ? 'font-bold' : 'bg-zinc-100 dark:bg-zinc-800/70'">
-            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">
-              <img
-                class="-mt-0.5 mr-1 inline h-5 align-middle"
-                :class="personKey === 0 ? '' : 'hidden'"
-                src="@/assets/crown.png"
-                alt="" />
-              {{ person[0] }}
-            </td>
-            <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">
-              {{ person[1] }}
-              <span class="text-sm text-zinc-500 dark:text-zinc-400">
-                ({{ mlbPoints[person[0]] }}/{{ allStarPoints[person[0]] || 0 }})
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <DataTable
+      :columns="columns"
+      :rows="rows"
+      row-key="owner"
+      :row-class="getRowClass">
+      <template #cell-owner="{ row }">
+        <div class="whitespace-nowrap">
+          <img
+            class="-mt-0.5 mr-1 inline h-5 align-middle"
+            :class="row.owner === topOwner ? '' : 'hidden'"
+            src="@/assets/crown.png"
+            alt="" />
+          {{ row.owner }}
+        </div>
+      </template>
+      <template #cell-totalPoints="{ row }">
+        <span class="whitespace-nowrap">
+          {{ row.totalPoints }}
+        </span>
+      </template>
+    </DataTable>
     <div class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-      <strong>Key:</strong> Total Points (<span class="text-zinc-500 dark:text-zinc-400">MLB/All-Star</span>)
+      <strong>Key:</strong> Regular-season points from the current division leaders only.
+    </div>
+    <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+      All-Star Break points are tracked separately on the All-Star Break page.
     </div>
     <a class="mt-2 block" href="#/teams">See team ownerships →</a>
   </template>

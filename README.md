@@ -2,7 +2,7 @@
 
 ## Overview
 
-Static Vue 3 site for the Montesano Fantasy Baseball league. This repository is archived for the 2025 season and is fully offline (no runtime API calls).
+Vue 3 site for the Montesano Fantasy Baseball league, updated for the 2026 season. The app now uses live MLB StatsAPI data at runtime with client-side caching in `localStorage` to keep calls low.
 
 ## Agent Start Here
 
@@ -11,12 +11,23 @@ Static Vue 3 site for the Montesano Fantasy Baseball league. This repository is 
 - Efficient API workflows and examples: `docs/agent-workflows.md`
 - MLB StatsAPI schema snapshot: `docs/api/swagger-docs.json`
 
-## Offline Archive
+## 2025 -> 2026 Rule Changes
 
-- All MLB data is baked into `src/data/mlb-2025.json`.
+- Wagers are collected up front on draft day instead of settling balances month by month.
+- Regular-season team points are now calculated from true draft-day division odds, including negative odds.
+- Draft value is prorated by round. Round 1 keeps full value, and rounds 2-7 step down by sevenths.
+- Wild-card teams are now worth points, but only at end of season.
+- Special-case bonuses such as no-hitters or player record events are gone.
+- Tie-breakers now follow MLB-style tie-break ordering instead of point sharing inside divisions.
+
+## Runtime Data
+
+- MLB standings are fetched live from StatsAPI and cached in `localStorage` for one hour.
+- All-Star data is fetched live when available and cached in `localStorage` for twelve hours.
+- 2026 draft ownership, odds, rounds, and stakes live in `src/data/season-2026.js`.
+- Historical payout results are kept in `src/data/payout-history.js`.
 - Team logos live in `src/assets/team-logos/`.
 - Home Run Derby image lives in `src/assets/hrd-2025.jpg`.
-- No external network requests are made at runtime.
 
 ## 2025 Season Results
 

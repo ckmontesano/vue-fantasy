@@ -1,34 +1,69 @@
 <script setup>
+import { computed } from "vue";
+import { formatAmericanOdds } from "@/data/season-2026.js";
+import DataTable from "@/components/DataTable.vue";
 import getTeamLogoURL from "@/scripts/mlb-team-logos.js";
 
 const { teams } = defineProps(["teams"]);
+
+function parseGamesBack(gamesBack) {
+  return gamesBack === "-" ? 0 : Number(gamesBack);
+}
+
+const rows = computed(() =>
+  (teams || []).slice().sort((left, right) => Number(left.divisionRank) - Number(right.divisionRank)),
+);
+
+const columns = [
+  {
+    key: "team",
+    label: "Team",
+    sortable: true,
+    sortValue: (row) => row.team.name,
+  },
+  {
+    key: "draftRound",
+    label: "Round",
+    sortable: true,
+    value: (row) => row.team.draftRound,
+  },
+  {
+    key: "odds",
+    label: "Odds",
+    sortable: true,
+    value: (row) => row.team.odds,
+  },
+  {
+    key: "divisionRank",
+    label: "Place in Division",
+    sortable: true,
+    sortValue: (row) => Number(row.divisionRank),
+  },
+  {
+    key: "gamesBack",
+    label: "Games Back",
+    sortable: true,
+    sortValue: (row) => parseGamesBack(row.gamesBack),
+  },
+  {
+    key: "fantasyPoints",
+    label: "Draft Points",
+    sortable: true,
+    value: (row) => row.team.fantasyPoints,
+  },
+];
 </script>
 
 <template>
-  <div class="overflow-x-auto">
-    <table class="min-w-full border-collapse text-sm">
-    <thead>
-      <tr class="bg-zinc-300 dark:bg-zinc-700">
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Team</th>
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Place in Division</th>
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Games Back</th>
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Points</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        class="odd:bg-zinc-100 odd:dark:bg-zinc-800/70"
-        v-for="(team, index) in teams.slice().sort((a, b) => a.divisionRank - b.divisionRank)"
-        :key="index">
-        <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">
-          <img class="mr-1 inline h-5 w-5 align-middle" :src="getTeamLogoURL(team.team.id)" />
-          {{ team.team.name }}
-        </td>
-        <td class="border border-zinc-500/50 px-3 py-2">{{ team.divisionRank }}</td>
-        <td class="border border-zinc-500/50 px-3 py-2">{{ team.gamesBack }}</td>
-        <td class="border border-zinc-500/50 px-3 py-2">{{ team.team.odds }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+  <DataTable :columns="columns" :rows="rows" :row-key="(row) => row.team.id">
+    <template #cell-team="{ row }">
+      <span class="whitespace-nowrap">
+        <img class="mr-1 inline h-5 w-5 align-middle" :src="getTeamLogoURL(row.team.id)" />
+        {{ row.team.name }}
+      </span>
+    </template>
+    <template #cell-draftRound="{ row }">{{ row.team.draftRound ?? "—" }}</template>
+    <template #cell-odds="{ row }">{{ formatAmericanOdds(row.team.odds) }}</template>
+    <template #cell-fantasyPoints="{ row }">{{ row.team.fantasyPoints }}</template>
+  </DataTable>
 </template>

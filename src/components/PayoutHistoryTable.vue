@@ -1,27 +1,40 @@
 <script setup>
-// dependencies
+import { SEASON } from "@/data/season-2026.js";
+import DataTable from "@/components/DataTable.vue";
 import { usePayoutHistory } from "@/composables/usePayoutHistory.js";
 
-const { payoutHistory } = usePayoutHistory();
+const { isLoading, payoutHistory } = usePayoutHistory();
+
+const monthOrder = {
+  April: 4,
+  May: 5,
+  June: 6,
+  "All-Star Break": 6.5,
+  July: 7,
+  August: 8,
+  September: 9,
+};
+
+const columns = [
+  {
+    key: "date",
+    label: "Date",
+    sortable: true,
+    sortValue: (row) => monthOrder[row.date] || 99,
+  },
+  { key: "winner", label: "Winner", sortable: true },
+  { key: "amount", label: "Amount", sortable: true },
+];
 </script>
 
 <template>
-  <div class="overflow-x-auto">
-    <table class="min-w-full border-collapse text-sm">
-    <thead>
-      <tr class="bg-zinc-300 dark:bg-zinc-700">
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Date</th>
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Winner</th>
-        <th class="whitespace-nowrap border border-zinc-500/50 px-3 py-2 text-left">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(entry, index) in payoutHistory" :key="index" class="odd:bg-zinc-100 odd:dark:bg-zinc-800/70">
-        <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">{{ entry.date }}</td>
-        <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">{{ entry.winner }}</td>
-        <td class="whitespace-nowrap border border-zinc-500/50 px-3 py-2">${{ entry.amount }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+  <DataTable
+    :columns="columns"
+    :rows="payoutHistory"
+    row-key="snapshotDate"
+    :empty-message="isLoading ? 'Loading payout history...' : `No ${SEASON} payout results yet.`">
+    <template #cell-date="{ row }">{{ row.date }}</template>
+    <template #cell-winner="{ row }">{{ row.winner }}</template>
+    <template #cell-amount="{ row }">${{ row.amount }}</template>
+  </DataTable>
 </template>
