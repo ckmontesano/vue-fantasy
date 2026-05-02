@@ -73,12 +73,18 @@
     background-color: rgb(2 6 23 / 0.95);
   }
 
-  html.theme-midnight.dark .dark\:bg-zinc-900,
+  html.theme-midnight.dark .dark\:bg-zinc-900 {
+    background-color: rgb(2 6 23);
+  }
+
   html.theme-midnight.dark .dark\:bg-zinc-900\/80 {
     background-color: rgb(2 6 23 / 0.8);
   }
 
-  html.theme-midnight.dark .dark\:bg-zinc-800,
+  html.theme-midnight.dark .dark\:bg-zinc-800 {
+    background-color: rgb(15 23 42);
+  }
+
   html.theme-midnight.dark .dark\:bg-zinc-800\/70 {
     background-color: rgb(15 23 42 / 0.9);
   }

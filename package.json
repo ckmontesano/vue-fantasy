@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "npx eslint",
-    "lint:scss": "stylelint 'src/styles/**/*.scss'",
+    "lint:scss": "stylelint 'src/styles/**/*.{css,scss}' --allow-empty-input",
     "prepare": "husky install"
   },
   "dependencies": {

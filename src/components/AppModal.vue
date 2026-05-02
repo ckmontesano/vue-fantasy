@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
       role="dialog"
       @click.self="closeModal">
       <div
-        class="w-full rounded-lg border border-zinc-300 bg-zinc-100 p-6 shadow-xl dark:border-zinc-700 dark:bg-zinc-800 app-modal"
+        class="app-modal flex max-h-[75vh] w-full flex-col overflow-hidden rounded-lg border border-zinc-300 bg-zinc-100 p-6 shadow-xl sm:max-h-[calc(100vh-4rem)] dark:border-zinc-700 dark:bg-zinc-800"
         :class="maxWidthClass">
         <div class="flex items-start justify-between gap-4">
           <h2 class="text-2xl font-semibold tracking-tight">{{ title }}</h2>
@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
             Close
           </button>
         </div>
-        <div class="mt-4">
+        <div class="mt-4 min-h-0 flex-1 overflow-y-auto">
           <slot />
         </div>
       </div>

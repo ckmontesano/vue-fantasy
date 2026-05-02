@@ -44,6 +44,7 @@ const closeMobileNav = () => {
 };
 
 function openSettings() {
+  closeMobileNav();
   isSettingsOpen.value = true;
 }
 
@@ -102,7 +103,8 @@ function getOptionClass(isSelected) {
       <a href="#/" class="group flex items-center gap-3 text-inherit" @click="closeMobileNav">
         <img class="h-9 w-9" :src="baseballIcon" draggable="false" alt="Montesano Fantasy Baseball logo" />
         <div class="flex flex-col leading-tight">
-          <span class="text-xl font-semibold tracking-tight">Montesano Fantasy Baseball</span>
+          <span class="text-xl font-semibold tracking-tight sm:hidden">MFB</span>
+          <span class="hidden text-xl font-semibold tracking-tight sm:block">Montesano Fantasy Baseball</span>
           <span class="-mt-1.5 text-base text-zinc-600 dark:text-zinc-300">2026 Season</span>
         </div>
       </a>
@@ -120,6 +122,15 @@ function getOptionClass(isSelected) {
                 {{ link.label }}
               </a>
             </li>
+            <li class="md:hidden">
+              <button
+                class="accent-focus block w-full rounded-md px-3 py-2 text-left font-semibold text-zinc-700 transition hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                type="button"
+                aria-label="Open settings"
+                @click="openSettings">
+                Settings
+              </button>
+            </li>
             <li class="hidden md:block">
               <button
                 class="accent-focus inline-flex items-center justify-center rounded-md px-3 py-1.5 font-semibold text-zinc-700 transition hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
@@ -133,19 +144,11 @@ function getOptionClass(isSelected) {
         </nav>
 
         <button
-          class="accent-focus inline-flex items-center justify-center rounded-md px-3 py-2 font-semibold text-zinc-700 transition hover:bg-zinc-200 hover:text-zinc-900 md:hidden dark:text-zinc-200 dark:hover:bg-zinc-800"
-          type="button"
-          aria-label="Open settings"
-          @click="openSettings">
-          <span class="text-lg">⚙</span>
-        </button>
-
-        <button
-          class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-zinc-300 text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-100 md:hidden dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-800"
+          class="accent-focus inline-flex h-11 w-11 items-center justify-center rounded-md text-zinc-700 transition hover:bg-zinc-100 md:hidden dark:text-zinc-200 dark:hover:bg-zinc-800"
           type="button"
           aria-label="Toggle navigation"
           @click="toggleMobileNav">
-          <span class="text-lg">☰</span>
+          <span class="text-xl leading-none">☰</span>
         </button>
       </div>
     </div>

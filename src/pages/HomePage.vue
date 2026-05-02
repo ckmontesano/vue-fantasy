@@ -78,8 +78,8 @@ function openDisputeModal() {
       <MlbDivisionLeadersTable />
     </div>
   </div>
-  <div v-if="activeTab === 'payouts'" class="flex flex-col items-start gap-4 pb-2 md:flex-row md:gap-10">
-    <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
+  <div v-if="activeTab === 'payouts'" class="flex flex-col gap-4 pb-2 md:flex-row md:items-start md:gap-10">
+    <div class="mb-2 w-full min-w-0 flex-1 md:min-w-[350px]">
       <h2 class="mb-2 text-2xl font-semibold">Pools / Stakes</h2>
       <DataTable
         :columns="poolsColumns"
@@ -90,7 +90,7 @@ function openDisputeModal() {
         March does not count toward monthly regular-season winners.
       </p>
     </div>
-    <div class="mb-2 min-w-0 flex-1 md:min-w-[350px]">
+    <div class="mb-2 w-full min-w-0 flex-1 md:min-w-[350px]">
       <h2 class="mb-2 text-2xl font-semibold">Payout History</h2>
       <PayoutHistoryTable />
     </div>
