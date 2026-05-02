@@ -1,3 +1,218 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+    --accent-solid: #2563eb;
+    --accent-on-solid: #ffffff;
+    --accent-soft: #60a5fa;
+    --accent-on-soft: #0f172a;
+    --accent-tint-light: #dbeafe;
+    --accent-tint-dark: #1d4ed8;
+    --accent-ring: rgb(37 99 235 / 0.4);
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.accent-red {
+    --accent-solid: #dc2626;
+    --accent-on-solid: #ffffff;
+    --accent-soft: #f87171;
+    --accent-on-soft: #111827;
+    --accent-tint-light: #fee2e2;
+    --accent-tint-dark: #b91c1c;
+    --accent-ring: rgb(220 38 38 / 0.4);
+  }
+
+  html.accent-orange {
+    --accent-solid: #ea580c;
+    --accent-on-solid: #ffffff;
+    --accent-soft: #fb923c;
+    --accent-on-soft: #111827;
+    --accent-tint-light: #ffedd5;
+    --accent-tint-dark: #c2410c;
+    --accent-ring: rgb(234 88 12 / 0.4);
+  }
+
+  html.accent-purple {
+    --accent-solid: #7c3aed;
+    --accent-on-solid: #ffffff;
+    --accent-soft: #a78bfa;
+    --accent-on-soft: #111827;
+    --accent-tint-light: #ede9fe;
+    --accent-tint-dark: #6d28d9;
+    --accent-ring: rgb(124 58 237 / 0.4);
+  }
+
+  html.theme-midnight.dark .app-shell {
+    background-color: rgb(2 6 23);
+    color: rgb(226 232 240);
+  }
+
+  html.theme-midnight.dark .app-main {
+    background-color: rgb(15 23 42);
+  }
+
+  html.theme-midnight.dark .app-nav {
+    background-color: rgb(2 6 23 / 0.95);
+  }
+
+  html.theme-midnight.dark .app-footer {
+    background-color: rgb(2 6 23);
+  }
+
+  html.theme-midnight.dark .app-modal {
+    background-color: rgb(15 23 42);
+  }
+
+  html.theme-midnight.dark .dark\:bg-zinc-950\/95 {
+    background-color: rgb(2 6 23 / 0.95);
+  }
+
+  html.theme-midnight.dark .dark\:bg-zinc-900,
+  html.theme-midnight.dark .dark\:bg-zinc-900\/80 {
+    background-color: rgb(2 6 23 / 0.8);
+  }
+
+  html.theme-midnight.dark .dark\:bg-zinc-800,
+  html.theme-midnight.dark .dark\:bg-zinc-800\/70 {
+    background-color: rgb(15 23 42 / 0.9);
+  }
+
+  html.theme-midnight.dark .odd\:dark\:bg-zinc-800\/70:nth-child(odd) {
+    background-color: rgb(15 23 42 / 0.9);
+  }
+
+  html.theme-midnight.dark .dark\:bg-zinc-700 {
+    background-color: rgb(30 41 59);
+  }
+
+  html.theme-midnight.dark .dark\:border-zinc-700 {
+    border-color: rgb(51 65 85);
+  }
+
+  html.theme-midnight.dark .dark\:border-zinc-600 {
+    border-color: rgb(71 85 105);
+  }
+
+  html.theme-midnight.dark .dark\:border-zinc-500 {
+    border-color: rgb(100 116 139);
+  }
+
+  html.theme-midnight.dark .dark\:text-zinc-100 {
+    color: rgb(226 232 240);
+  }
+
+  html.theme-midnight.dark .dark\:text-zinc-200 {
+    color: rgb(203 213 225);
+  }
+
+  html.theme-midnight.dark .dark\:text-zinc-300 {
+    color: rgb(148 163 184);
+  }
+
+  html.theme-midnight.dark .dark\:text-zinc-400 {
+    color: rgb(100 116 139);
+  }
+
+  html.theme-midnight.dark .dark\:text-zinc-950 {
+    color: rgb(2 6 23);
+  }
+
+  html.theme-midnight.dark .dark\:hover\:bg-zinc-800:hover {
+    background-color: rgb(30 41 59);
+  }
+
+  html.theme-midnight.dark .dark\:hover\:bg-zinc-700:hover {
+    background-color: rgb(51 65 85);
+  }
+}
+
+@layer components {
+  .accent-link {
+    color: var(--accent-solid);
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+
+  .accent-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  html.dark .accent-link {
+    color: var(--accent-soft);
+  }
+
+  .accent-focus {
+    outline: none;
+  }
+
+  .accent-focus:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent-ring);
+  }
+
+  .accent-tab-active {
+    border-color: var(--accent-solid);
+    background-color: var(--accent-solid);
+    color: var(--accent-on-solid);
+  }
+
+  html.dark .accent-tab-active {
+    border-color: var(--accent-soft);
+    background-color: var(--accent-soft);
+    color: var(--accent-on-soft);
+  }
+
+  .accent-outline-button {
+    border-color: var(--accent-solid);
+    color: var(--accent-solid);
+  }
+
+  .accent-outline-button:hover {
+    background-color: var(--accent-tint-light);
+  }
+
+  html.dark .accent-outline-button {
+    border-color: var(--accent-soft);
+    color: var(--accent-soft);
+  }
+
+  html.dark .accent-outline-button:hover {
+    background-color: var(--accent-tint-dark);
+    color: rgb(226 232 240);
+  }
+
+  .accent-choice-selected {
+    border-color: var(--accent-solid);
+    background-color: var(--accent-tint-light);
+    color: rgb(17 24 39);
+  }
+
+  html.dark .accent-choice-selected {
+    border-color: var(--accent-soft);
+    background-color: var(--accent-tint-dark);
+    color: rgb(226 232 240);
+  }
+
+  .accent-swatch {
+    border: 1px solid rgb(255 255 255 / 0.4);
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
+  }
+
+  .badge-new {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background-color: rgb(251 191 36);
+    padding: 0.1rem 0.4rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: rgb(120 53 15);
+    text-transform: uppercase;
+  }
+}

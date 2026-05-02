@@ -112,7 +112,7 @@ watch(
     <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
       All-Star Break points are tracked separately on the All-Star Break page.
     </div>
-    <a class="mt-2 block" href="#/teams">See team ownerships →</a>
+    <a class="accent-link mt-2 block" href="#/teams">See team ownerships →</a>
   </template>
   <p v-else>Loading…</p>
 </template>

@@ -57,7 +57,7 @@ const tieBreakerItems = [
         :href="RULEBOOK_URL"
         target="_blank"
         rel="noreferrer"
-        class="inline-flex items-center self-start rounded-md border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 md:ml-auto dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-700 dark:hover:text-zinc-100">
+        class="accent-focus accent-outline-button inline-flex items-center self-start rounded-md border px-3 py-2 text-sm font-semibold transition md:ml-auto">
         Open Full Rulebook
       </a>
     </div>

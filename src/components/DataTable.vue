@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 
 const props = defineProps({
   columns: {
@@ -24,7 +24,7 @@ const props = defineProps({
   },
   tableClass: {
     type: String,
-    default: "min-w-full border-collapse text-sm",
+    default: "",
   },
   headerRowClass: {
     type: String,
@@ -46,6 +46,8 @@ const props = defineProps({
 
 const activeSortKey = ref(null);
 const activeSortDirection = ref("asc");
+const columnWidths = ref({});
+let stopResizeListeners = null;
 
 function getColumnValue(column, row) {
   if (typeof column.value === "function") {
@@ -124,6 +126,69 @@ function resolveRowClass(row, rowIndex) {
   return props.rowClass;
 }
 
+function getColumnWidth(columnKey) {
+  return columnWidths.value[columnKey] ? `${columnWidths.value[columnKey]}px` : undefined;
+}
+
+function stopColumnResize() {
+  if (stopResizeListeners) {
+    stopResizeListeners();
+    stopResizeListeners = null;
+  }
+
+  document.body.style.cursor = "";
+  document.body.style.userSelect = "";
+}
+
+function startColumnResize(column, event) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  stopColumnResize();
+
+  const headerCell = event.currentTarget.closest("th");
+
+  if (!headerCell) {
+    return;
+  }
+
+  const startX = event.clientX;
+  const startWidth = headerCell.getBoundingClientRect().width;
+
+  document.body.style.cursor = "col-resize";
+  document.body.style.userSelect = "none";
+
+  const handleMouseMove = (moveEvent) => {
+    const nextWidth = Math.max(88, Math.round(startWidth + (moveEvent.clientX - startX)));
+    columnWidths.value = {
+      ...columnWidths.value,
+      [column.key]: nextWidth,
+    };
+  };
+
+  const handleMouseUp = () => {
+    stopColumnResize();
+  };
+
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("mouseup", handleMouseUp, { once: true });
+
+  stopResizeListeners = () => {
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("mouseup", handleMouseUp);
+  };
+}
+
+onBeforeUnmount(() => {
+  if (typeof document !== "undefined") {
+    stopColumnResize();
+  }
+});
+
 const sortedRows = computed(() => {
   const rows = props.rows || [];
 
@@ -150,13 +215,16 @@ const sortedRows = computed(() => {
 
 <template>
   <div :class="containerClass">
-    <table :class="tableClass">
+    <table :class="['w-max min-w-full border-collapse text-sm', tableClass]">
+      <colgroup>
+        <col v-for="column in columns" :key="column.key" :style="{ width: getColumnWidth(column.key) }" />
+      </colgroup>
       <thead>
         <tr :class="headerRowClass">
           <th
             v-for="column in columns"
             :key="column.key"
-            :class="[headerCellClass, column.headerClass]"
+            :class="[headerCellClass, column.headerClass, 'relative']"
             :aria-sort="
               activeSortKey === column.key
                 ? activeSortDirection === 'asc'
@@ -175,6 +243,11 @@ const sortedRows = computed(() => {
             <template v-else>
               <slot :name="`header-${column.key}`" :column="column">{{ column.label }}</slot>
             </template>
+            <button
+              type="button"
+              class="absolute top-0 right-0 h-full w-3 cursor-col-resize border-r border-transparent hover:border-zinc-400 dark:hover:border-zinc-500"
+              aria-label="Resize column"
+              @mousedown="startColumnResize(column, $event)"></button>
           </th>
         </tr>
       </thead>

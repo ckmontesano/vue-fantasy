@@ -1,6 +1,7 @@
 <script setup>
 // components
 import { STAKES } from "@/data/season-2026.js";
+import AppModal from "@/components/AppModal.vue";
 import DataTable from "@/components/DataTable.vue";
 import MlbDivisionLeadersTable from "@/components/MlbDivisionLeadersTable.vue";
 import FantasyStandingsTable from "@/components/FantasyStandingsTable.vue";
@@ -53,10 +54,6 @@ function getPoolsRowClass(row, rowIndex) {
 function openDisputeModal() {
   isDisputeModalOpen.value = true;
 }
-
-function closeDisputeModal() {
-  isDisputeModalOpen.value = false;
-}
 </script>
 
 <template>
@@ -64,7 +61,7 @@ function closeDisputeModal() {
     <h1 class="text-4xl font-semibold tracking-tight">Home</h1>
     <button
       type="button"
-      class="inline-flex items-center self-start rounded-md border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-700 dark:hover:text-zinc-100"
+      class="accent-focus accent-outline-button inline-flex items-center self-start rounded-md border px-3 py-2 text-sm font-semibold transition"
       @click="openDisputeModal">
       Dispute Standings
     </button>
@@ -99,23 +96,7 @@ function closeDisputeModal() {
     </div>
   </div>
 
-  <div
-    v-if="isDisputeModalOpen"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 px-4"
-    aria-modal="true"
-    role="dialog"
-    @click.self="closeDisputeModal">
-    <div class="w-full max-w-md rounded-lg border border-zinc-300 bg-zinc-100 p-6 shadow-xl dark:border-zinc-700 dark:bg-zinc-800">
-      <div class="flex items-start justify-between gap-4">
-        <h2 class="text-2xl font-semibold tracking-tight">Standing Dispute</h2>
-        <button
-          type="button"
-          class="rounded-md border border-zinc-300 px-2 py-1 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-700 dark:hover:text-zinc-100"
-          @click="closeDisputeModal">
-          Close
-        </button>
-      </div>
-      <p class="mt-4 text-base">Go fuck yourself I'm the commissioner 🖕</p>
-    </div>
-  </div>
+  <AppModal v-model="isDisputeModalOpen" title="Standing Dispute">
+    <p class="text-base">Go fuck yourself I'm the commissioner 🖕</p>
+  </AppModal>
 </template>

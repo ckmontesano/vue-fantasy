@@ -75,5 +75,5 @@ const divisionRows = computed(() => {
     <template #cell-points="{ row }">{{ row.points ?? "—" }}</template>
   </DataTable>
   <p v-else>Loading…</p>
-  <a class="mt-2 block" href="#/mlb-standings">See full standings →</a>
+  <a class="accent-link mt-2 block" href="#/mlb-standings">See full standings →</a>
 </template>
